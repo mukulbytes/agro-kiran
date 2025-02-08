@@ -11,10 +11,11 @@ a {
   top: 0;
   left: 0;
   right: 0;
-  box-shadow: 2px 2px 5px rgba(5, 70, 53, 0.2);
+  /* box-shadow: 2px 2px 5px rgba(5, 70, 53, 0.2); */
   width: 100vw;
   padding: 15px 35px;
   font-size: 1.05rem;
+  background-color: #054635;
 }
 .header .nav-container {
   display: flex;
@@ -22,9 +23,14 @@ a {
   align-items: center;
   margin: auto;
   max-width: 80%;
+  margin-top: 10px;
 }
 .header .nav-container .logo-container {
-  width: 55px;
+  width: 60px;
+  transition: all ease 0.17s;
+}
+.header .nav-container .logo-container img {
+  width: 100%;
   transition: all ease 0.17s;
 }
 .header .nav-container .logo-container:hover {
@@ -36,6 +42,7 @@ a {
   column-gap: 50px;
 }
 .header .nav-container .nav-links li a {
+  color: white;
   transition: all ease 0.2s;
 }
 .header .nav-container .nav-links li a:hover {
@@ -52,9 +59,12 @@ a {
   padding: 5px 10px;
   font-size: 0.8rem;
   border-radius: 20px;
-  border: 1px solid #054635;
+  border: 1px solid white;
 }
 .header .nav-container .user-actions .login {
-  background-color: #054635;
+  background-color: white;
+  color: #054635;
+}
+.header .nav-container .user-actions .sign-up {
   color: white;
 }

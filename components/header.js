@@ -1,12 +1,10 @@
 export function renderHeader() {
-    const headerElement = document.querySelector('.js-header');
-    const headerHTML = `
+  const headerElement = document.querySelector('.js-header');
+  const headerHTML = `
      <nav class="nav-container">
-        <object
-          data="images/AgroKiranLogo.svg"
-          type="image/svg+xml"
-          class="logo-container"
-        ></object>
+        <div class="logo-container">
+          <img src="images/agro-kiran-dark.png" alt="">
+        </div>
 
         <ul class="nav-links">
           <li><a href="#" class="active">Home</a></li>
@@ -21,5 +19,5 @@ export function renderHeader() {
         </div>
       </nav>
     `;
-    headerElement.innerHTML = headerHTML;
+  headerElement.innerHTML = headerHTML;
 }
