@@ -1,0 +1,53 @@
+.custom-shape-divider-top-1739194782 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1739194782 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 48px;
+}
+
+.custom-shape-divider-top-1739194782 .shape-fill {
+    fill: #054635;
+}
+
+.certifications-container {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: beige;
+  padding: 20px;
+  padding-top: 50px;
+}
+.certifications-container h2 {
+  font-size: 2.5rem;
+  color: #054635;
+  font-weight: 500;
+}
+.certifications-container .cert-logos {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+}
+.certifications-container .cert-logos p {
+  color: white;
+  padding: 5px 20px;
+  border-radius: 6rem;
+  background-color: rgb(37, 126, 61);
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+.cert-logos img {
+  height: 100px;
+}
