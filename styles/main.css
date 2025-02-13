@@ -1,36 +1,59 @@
-.custom-shape-divider-top-1739194782 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
+main .key-highlights-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr;
+  /* padding: 50px; */
+  padding-bottom: 100px;
+  background-color: #054635;
 }
-
-.custom-shape-divider-top-1739194782 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 48px;
+main .key-highlights-container .left-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.custom-shape-divider-top-1739194782 .shape-fill {
-    fill: #054635;
+main .key-highlights-container .left-section img {
+  height: clamp(19.75rem, 0.5rem + 30dvw, 30rem);
 }
-
+main .key-highlights-container .right-section {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 0.5fr 0.5fr;
+  gap: 20px;
+  padding: 20px;
+}
+.key-highlights-container .right-section .highlight-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+}
+.key-highlights-container .right-section .highlight-wrapper img {
+  width: clamp(3.5rem, 0.5rem + 5dvw, 5rem);
+}
+.key-highlights-container .right-section .highlight-wrapper .highlight-heading {
+  color: #fab12f;
+  /* font-size: 1.8rem; */
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+.key-highlights-container .right-section .highlight-wrapper .highlight-content {
+  font-size: 1.1rem;
+  font-weight: 200;
+  color: white;
+}
 .certifications-container {
   position: relative;
   overflow: hidden;
   display: flex;
+  background-color: beige;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: beige;
+
   padding: 20px;
-  padding-top: 50px;
+  /* padding-top: 50px; */
 }
 .certifications-container h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #054635;
   font-weight: 500;
 }
@@ -48,6 +71,24 @@
   font-size: 3.5rem;
   font-weight: 700;
 }
-.cert-logos img {
+.certifications-container .cert-logos img {
   height: 100px;
+}
+main .featured-product-container {
+  background-color: #054635;
+}
+main .featured-product-container .f-prod- {
+}
+@media (max-width: 660px) {
+  main .key-highlights-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-bottom: 100px;
+    background-color: #054635;
+  }
+  main .key-highlights-container .right-section {
+    grid-row-start: 1;
+    padding-top: 50px;
+  }
 }
