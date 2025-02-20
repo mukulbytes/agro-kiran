@@ -2,7 +2,6 @@ main .key-highlights-container {
   position: relative;
   display: grid;
   grid-template-columns: 0.5fr 0.5fr;
-  /* padding: 50px; */
   padding-bottom: 100px;
   background-color: #054635;
 }
@@ -10,13 +9,12 @@ main .key-highlights-container .left-section {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-main .key-highlights-container .left-section img {
-  height: clamp(19.75rem, 0.5rem + 30dvw, 30rem);
+  padding: 20px;
 }
 main .key-highlights-container .right-section {
   display: grid;
   justify-content: center;
+  align-items: center;
   grid-template-columns: 0.5fr 0.5fr;
   gap: 20px;
   padding: 20px;
@@ -31,12 +29,16 @@ main .key-highlights-container .right-section {
 }
 .key-highlights-container .right-section .highlight-wrapper .highlight-heading {
   color: #fab12f;
-  /* font-size: 1.8rem; */
   font-size: 1.3rem;
+  font-size: 1.8rem;
+  font-size: clamp(1.3rem, 0.1rem + 2dvw, 2rem);
   font-weight: 300;
 }
 .key-highlights-container .right-section .highlight-wrapper .highlight-content {
   font-size: 1.1rem;
+  font-size: 0.85rem;
+  font-size: 1.2dvw;
+  font-size: clamp(0.85rem, 0.1rem + 1.2dvw, 1.1rem);
   font-weight: 200;
   color: white;
 }
@@ -48,9 +50,7 @@ main .key-highlights-container .right-section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   padding: 20px;
-  /* padding-top: 50px; */
 }
 .certifications-container h2 {
   font-size: 2rem;
@@ -68,16 +68,11 @@ main .key-highlights-container .right-section {
   padding: 5px 20px;
   border-radius: 6rem;
   background-color: rgb(37, 126, 61);
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 700;
 }
 .certifications-container .cert-logos img {
   height: 100px;
-}
-main .featured-product-container {
-  background-color: #054635;
-}
-main .featured-product-container .f-prod- {
 }
 @media (max-width: 660px) {
   main .key-highlights-container {
@@ -91,4 +86,9 @@ main .featured-product-container .f-prod- {
     grid-row-start: 1;
     padding-top: 50px;
   }
+}
+main .featured-product-container {
+  background-color: #054635;
+}
+main .featured-product-container .f-prod- {
 }
