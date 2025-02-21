@@ -5,60 +5,98 @@
     <meta name="viewport" content="width='device-width', initial-scale=1.0" />
     <title>Agro Kiran -</title>
 
-    <link rel="stylesheet" href="styles/general.css" />
-    <link rel="stylesheet" href="styles/header.css" />
-    <link rel="stylesheet" href="styles/hero.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <!-- <link rel="stylesheet" href="styles/hero.css" /> -->
     <link rel="stylesheet" href="styles/main.css" />
-    <script
-      type="module"
-      src="https://unpkg.com/@lottiefiles/dotlottie-wc@latest/dist/dotlottie-wc.js"
-    ></script>
+    <script type="module" src="https://unpkg.com/@lottiefiles/dotlottie-wc@latest/dist/dotlottie-wc.js"></script>
   </head>
   <body>
     <!-- Header Navigation -->
-    <header class="header js-header"></header>
+    <header class="js-header fixed top-0 right-0 left-0 z-100 w-full py-[15px] px-[35px] text-[1.05rem] bg-primary h-20">
+      <nav class="flex justify-between items-center">
+        <!-- Logo -->
+        <img class="w-[60px] duration-170 hover:scale-105" src="images/agro-kiran-dark.png" alt="-brand-logo" />
+        <!-- Nav Links -->
+        <ul class="hidden md:flex gap-8 text-white ml-20 flex-1 justify-center">
+          <li>
+            <a class="nav-links" href="#">Home</a>
+          </li>
+          <li><a class="nav-links" href="#">Shop</a></li>
+          <li>
+            <a class="nav-links" href="#">About</a>
+          </li>
+          <li>
+            <a class="nav-links" href="#">Contact</a>
+          </li>
+        </ul>
+        <!-- Cart Icon -->
+        <div class="mr-4 hidden md:flex items-center">
+          <span class="relative flex size-3">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75 -top-2.5 left-2.5"></span>
+            <span class="relative inline-flex size-3 rounded-full bg-secondary -top-2.5 left-2.5"></span>
+          </span>
+          <i class="fa-solid fa-cart-shopping text-white text-[20px]"></i>
+        </div>
+
+        <!-- Login Signup -->
+        <div class="hidden md:flex gap-2 items-center justify-center">
+          <!-- Buttons -->
+          <div class="js-ls-btns flex gap-2">
+            <a href="" class="user-actions bg-white text-primary hover:bg-transparent">Login</a>
+            <a href="" class="user-actions text-white">Sign Up</a>
+          </div>
+          <!-- User Menu -->
+          <a class="js-user-menu relative hidden justify-center items-center border-2 border-white rounded-full size-[28px]" href="">
+            <i class="fa-solid fa-user text-white text-[12px]"></i>
+          </a>
+        </div>
+        <!-- Hamburger Icon -->
+        <button class="md:hidden">
+          <i class="fa-solid fa-bars text-white text-2xl"></i>
+        </button>
+      </nav>
+    </header>
+
+    <div class="h-20 bg-primary"><!-- Spacer --></div>
 
     <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="hero-left">
+    <section class="hero-section grid sm:grid-cols-2 h-[100dvh] relative overflow-hidden">
+      <!-- Left Section -->
+      <div class="hero-left flex justify-center items-center bg-amber-100">
         <img class="anim-left flower" src="images/hero-Animated.png" alt="" />
-        <div class="left-wrapper">
-          <h3>HARVEST PROSPERITY</h3>
-          <h1>
-            Smart Farming <span style="color: #054635">Begins with</span>
-            <span>Smarter Fertilizers</span>
+
+        <!-- Left Wrapper -->
+        <div
+          class="left-wrapper 3xl:w-[80%] flex flex-col justify-center items-center text-left gap-y-1 px-5 pt-14 pb-4 z-2 sm:items-start sm:mx-3 md:mx-[20px]"
+        >
+          <h3 class="text-secondary sm:text-[1rem] xl:text-[1.3rem]">HARVEST PROSPERITY</h3>
+
+          <h1
+            class="text-primary text-center sm:text-left text-[clamp(2rem,0.5rem+8vw,3rem)]/[95%] sm:text-[6vw]/[90%] md:text-[clamp(2.2rem,5.5vw,4.5rem)] 3xl:text-[5.5rem] font-bold"
+          >
+            Smart Farming <span class="text-secondary block">Begins with</span>
+            <span class="text-nowrap animate-text smart-text">Smart Fertilizers</span>
           </h1>
-          <p class="hero-text">
-            AI-powered recommendations make fertilizer shopping effortless! Get
-            expert guidance, explore quality fertilizers, and shop seamlessly
-            tailored to your crops, soil, and growth stage for smarter growth
-            and higher yields.
+
+          <p
+            class="hero-text text-center sm:text-left text-[clamp(0.2rem,0.5rem+1vh,1.2rem)] font-[350] line-clamp-4 sm:line-clamp-none mt-1 w-[80%]"
+          >
+            AI-powered recommendations make fertilizer shopping effortless! Get expert guidance, explore quality fertilizers, and shop seamlessly
+            tailored to your crops, soil, and growth stage for smarter growth and higher yields.
           </p>
-          <div class="hero-btn-wrapper">
-            <button class="hero-ai-button">AI-CHAT</button>
-            <button class="hero-shop-button">SHOP NOW</button>
+          <div class="hero-btn-wrapper mt-5 flex gap-x-2">
+            <button class="hero-btn">AI-CHAT</button>
+            <button class="hero-btn">SHOP NOW</button>
           </div>
         </div>
       </div>
 
-      <div class="hero-right">
+      <div class="hero-right bg-primary flex justify-center items-center overflow-hidden">
         <img class="anim-right flower" src="images/hero-Animated.png" alt="" />
         <div class="product-images-wrapper">
-          <img
-            src="images/hero-products/balance-mix.png"
-            alt="balance-mix-fertilizer"
-            class="product-images left-img"
-          />
-          <img
-            src="images/hero-products/bloom-power.png"
-            alt="bloom-power-fertilizer"
-            class="product-images center-img"
-          />
-          <img
-            src="images/hero-products/urea-plus.png"
-            alt="urea-plus-fertilizer"
-            class="product-images right-img"
-          />
+          <img src="images/hero-products/balance-mix.png" alt="balance-mix-fertilizer" class="product-images left-img" />
+          <img src="images/hero-products/bloom-power.png" alt="bloom-power-fertilizer" class="product-images center-img" />
+          <img src="images/hero-products/urea-plus.png" alt="urea-plus-fertilizer" class="product-images right-img" />
         </div>
         <img class="anim-bottom ellipse" src="images/hero-ellipse.png" alt="" />
       </div>
@@ -93,58 +131,29 @@
       <section class="key-highlights-container">
         <div class="left-section">
           <!-- Lottie Credits - Osama Sarsar https://lottiefiles.com/free-animation/harvest-season-ukoU4puEAw -->
-          <dotlottie-wc
-            style="height: 100%; width: 100%"
-            src="images/animations/Farmer.lottie"
-            autoplay
-            loop
-          ></dotlottie-wc>
+          <dotlottie-wc style="height: 100%; width: 100%" src="images/animations/Farmer.lottie" autoplay loop></dotlottie-wc>
         </div>
 
         <div class="right-section">
           <div class="highlight-wrapper">
-            <img
-              src="images/icons/Icon-Smart-Nutrition.png"
-              alt="smart-nutrition-icon"
-            />
+            <img src="images/icons/Icon-Smart-Nutrition.png" alt="smart-nutrition-icon" />
             <p class="highlight-heading">Smart Nutrition</p>
-            <p class="highlight-content">
-              AI-powered recommendations ensure precise fertilizers for crops
-              and growth stages.
-            </p>
+            <p class="highlight-content">AI-powered recommendations ensure precise fertilizers for crops and growth stages.</p>
           </div>
           <div class="highlight-wrapper">
-            <img
-              src="images/icons/Icon-Certified-Quality.png"
-              alt="smart-nutrition-icon"
-            />
+            <img src="images/icons/Icon-Certified-Quality.png" alt="smart-nutrition-icon" />
             <p class="highlight-heading">Certified Quality</p>
-            <p class="highlight-content">
-              Compliant with FCO & BIS, lab-tested for purity, effectiveness,
-              and safety.
-            </p>
+            <p class="highlight-content">Compliant with FCO & BIS, lab-tested for purity, effectiveness, and safety.</p>
           </div>
           <div class="highlight-wrapper">
-            <img
-              src="images/icons/Icon-Diverse-Range.png"
-              alt="smart-nutrition-icon"
-            />
+            <img src="images/icons/Icon-Diverse-Range.png" alt="smart-nutrition-icon" />
             <p class="highlight-heading">Diverse Range</p>
-            <p class="highlight-content">
-              Organic, inorganic, slow-release, and specialty fertilizers in
-              various forms.
-            </p>
+            <p class="highlight-content">Organic, inorganic, slow-release, and specialty fertilizers in various forms.</p>
           </div>
           <div class="highlight-wrapper">
-            <img
-              src="images/icons/Icon-Easy-Application.png"
-              alt="smart-nutrition-icon"
-            />
+            <img src="images/icons/Icon-Easy-Application.png" alt="smart-nutrition-icon" />
             <p class="highlight-heading">Easy Application</p>
-            <p class="highlight-content">
-              Available in granular, liquid, and foliar forms for hassle-free
-              usage.
-            </p>
+            <p class="highlight-content">Available in granular, liquid, and foliar forms for hassle-free usage.</p>
           </div>
         </div>
       </section>
@@ -166,6 +175,7 @@
         <div class="f-prod-">Product 3</div>
       </div>
     </main>
+    <script src="https://kit.fontawesome.com/10b097dc47.js" crossorigin="anonymous"></script>
     <script type="module" src="script.js"></script>
   </body>
 </html>

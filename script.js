@@ -1,5 +1,6 @@
-import { renderHeader } from "./components/header.js";
+import { loggedIn, renderHeader, toggleUserActions } from "./components/header.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderHeader();
+    // renderHeader();
+    toggleUserActions(loggedIn);
 })

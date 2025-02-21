@@ -1,3 +1,16 @@
+export let loggedIn = false;
+
+export function toggleUserActions(loggedIn) {
+  const loginSignup = document.querySelector('.js-ls-btns');
+  const userMenu = document.querySelector('.js-user-menu');
+  if (loggedIn) {
+    userMenu.classList.remove('hidden');
+    userMenu.classList.add('flex');
+    loginSignup.classList.remove('flex');
+    loginSignup.classList.add('hidden');
+  }
+}
+
 export function renderHeader() {
   const headerElement = document.querySelector('.js-header');
   const headerHTML = `
