@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./header.css";
+@import "./hero.css";
 /* @import "./hero.css"; */
 
 @theme {
@@ -17,59 +18,5 @@
 /* Keyboard Controls Outline */
 a,
 button {
-  @apply focus:outline-amber-400 focus:outline-4;
-}
-
-.flower {
-  /* Common for all screen */
-  @apply absolute drop-shadow-[-2px_5px_1px_rgba(0,0,0,0.2)] z-[1] motion-safe:animate-[spin_20s_linear_infinite_forwards];
-  @apply h-[clamp(10rem,6.8421rem+16.8421vw,22rem)];
-
-  @apply top-[var(--lrt-def)]  sm:top-[var(--lrt-sm)] md:top-[var(--lrt-md)] 2xl:top-[var(--lrt-2xl)];
-}
-.anim-left {
-  @apply left-[var(--lrt-def)]  sm:left-[var(--lrt-sm)] md:left-[var(--lrt-md)] 2xl:left-[var(--lrt-2xl)];
-}
-.anim-right {
-  @apply right-[var(--lrt-def)] sm:right-[var(--lrt-sm)] md:right-[var(--lrt-md)] 2xl:right-[var(--lrt-2xl)];
-}
-
-.product-images-wrapper {
-  @apply flex items-baseline absolute h-[32dvw] max-h-[25rem] min-h-[225px];
-}
-.ellipse {
-  @apply h-[35dvw] min-h-[450px] motion-safe:animate-[spin_50s_linear_infinite_forwards];
-}
-.left-img,
-.right-img {
-  @apply h-[85%] z-[9];
-}
-.center-img {
-  @apply h-[100%] z-[10];
-}
-.hero-btn {
-  @apply border-2 border-primary rounded-full py-1 px-5 bg-primary text-white font-semibold text-nowrap;
-}
-
-.smart-text {
-  background: linear-gradient(
-    to right,
-    rgba(5, 70, 53, 1) 0%,
-    rgba(10, 133, 28, 1) 14%,
-    rgba(5, 70, 53, 1) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;
-  background-size: 500% auto;
-  animation: text 3s ease-in-out infinite alternate;
-}
-@keyframes text {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
+  @apply focus-visible:outline-amber-400 focus-visible:outline-4;
 }
