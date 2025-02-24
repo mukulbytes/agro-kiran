@@ -1,12 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap");
 @import "tailwindcss";
 @import "./header.css";
 @import "./hero.css";
+@import "./main.css";
+
 /* @import "./hero.css"; */
 
 @theme {
   --color-primary: #054635;
   --color-secondary: #fab12f;
-  --breakpoint-3xl: 1780px;
+  --color-accent: rgb(8, 117, 89);
+  --breakpoint-xs: 23.5rem;
+  --font-quicksand: "Quicksand", serif;
 
   /* Flower left right top values for different screen sizes */
   --lrt-def: -20dvw;

@@ -36,7 +36,7 @@ export function renderHeader() {
           <li>
             <a class="nav-links" href="#">Home</a>
           </li>
-          <li><a class="nav-links" href="#">Shop</a></li>
+          <li><a class="nav-links" href="highligh.html">Shop</a></li>
           <li>
             <a class="nav-links" href="#">About</a>
           </li>
