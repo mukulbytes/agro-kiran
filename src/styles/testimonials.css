@@ -1,0 +1,44 @@
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet,
+.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+  width: 30px !important;
+  height: 4px !important;
+  border-radius: 5px !important;
+  margin: 0 6px !important;
+}
+
+.swiper-pagination {
+  bottom: 2px !important;
+}
+
+.swiper-wrapper {
+  height: max-content !important;
+  width: max-content !important;
+  padding-bottom: 50px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #054635 !important;
+}
+
+.swiper-slide.swiper-slide-active {
+  border-color: #fab12f !important;
+  border: 5px solid;
+}
+.swiper-slide.swiper-slide-active > .slide_active\:text-white {
+  color: white;
+}
+.swiper-slide.swiper-slide-active > .slide_active\:text-secondary {
+  color: #fab12f;
+}
+.swiper-slide.swiper-slide-active > .bottom-div.slide_active\:border {
+  border-color: #fab12f;
+}
+.swiper-slide.swiper-slide-active > .bottom-div > .group > .slide_active\:text-secondary {
+  color: #fab12f;
+}
+.swiper-slide.swiper-slide-active > .bottom-div > .group > .slide_active\:text-white {
+  color: white;
+}
+.swiper-slide.swiper-slide-active > .bottom-div > .slide_active\:opacity {
+  opacity: 100%;
+}
