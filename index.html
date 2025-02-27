@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width='device-width', initial-scale=1.0" />
     <title>Agro Kiran -</title>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
     <!-- Spacer -->
@@ -16,7 +16,7 @@
     <!-- Hamburger Icon -->
     <button
       class="flex justify-center fixed size-[35px] right-9 top-6 z-[10000] cursor-pointer rounded-lg duration-100 ease-in-out bg-transparent border-0 hover:shadow md:hidden"
-      id="icon"
+      id="icon" aria-label="Hamburger menu button"
     >
       <div class="icon-1 icons" id="a"></div>
       <div class="icon-2 icons" id="b"></div>
@@ -165,6 +165,7 @@
           <img src="images/certifications/npop.png" alt="icar-logo" />
         </div>
       </section>
+
       <!-- Featured Products -->
       <section class="relative bg-primary mx-auto shadow-2xl flex flex-col justify-center items-center gap-10 overflow-clip py-10">
         <h2
@@ -176,10 +177,11 @@
         <img src="images/flower-light-stroke.png" class="absolute size-180 -right-80" alt="" />
         <img src="images/flower-light-stroke.png" class="absolute size-180 -left-80" alt="" />
         <!-- Featured Products Container -->
-        <div class="js-featured-products-container grid grid-cols-2 mx-5 xl:flex lg:gap-15 xl:gap-5 gap-5">
-          <!-- Cards -->
+        <div class="js-featured-products-container grid xs:grid-cols-2 mx-5 gap-5 relative overflow-clip">
+          <!-- Product Card -->
         </div>
       </section>
+
     </main>
     <script src="https://kit.fontawesome.com/10b097dc47.js" crossorigin="anonymous"></script>
     <script type="module" src="script.js"></script>
