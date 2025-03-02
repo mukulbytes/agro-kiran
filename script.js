@@ -1,7 +1,7 @@
-import { renderHeader, navToggle, toggleUserActions } from "./src/components/header.js";
-import { renderHighlights } from "./src/components/keyhighlights.js";
-import { renderFeaturedProducts } from "./src/components/products.js";
-import { initSwiper, renderTestimonials } from "./src/components/testimonials.js";
+import { renderHeader, navToggle, toggleUserActions } from "./components/header.js";
+import { renderHighlights } from "./components/keyhighlights.js";
+import { renderFeaturedProducts } from "./components/products.js";
+import { initSwiper, renderTestimonials } from "./components/testimonials.js";
 
 
 document.addEventListener('DOMContentLoaded', () => {

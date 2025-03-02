@@ -54,7 +54,7 @@ export function renderFeaturedProducts() {
     let productHTML = "";
     products.forEach(product => {
         productHTML += `
-              <div class="grid grid-cols-1 lg:grid-cols-2 relative bg-accent rounded-2xl shadow-xs z-10 p-3 lg:py-10 lg:pr-10 justify-center items-center max-w-[50rem]">
+              <div class="grid grid-cols-1 lg:grid-cols-2 relative bg-accent rounded-2xl shadow-xs z-8 p-3 lg:py-10 lg:pr-10 justify-center items-center max-w-[50rem]">
                   <img src="images/flower-primary-stroke.png" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
             <!-- Image Div -->
             <div class="image-test relative flex items-center justify-center bg-center bg-no-repeat bg-contain bg-[url(../images/Product-bg.png)]">

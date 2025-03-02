@@ -1,0 +1,3 @@
+.footer-links{
+    @apply hover:underline-offset-2 hover:underline
+  }
