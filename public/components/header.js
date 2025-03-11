@@ -26,22 +26,25 @@ export function navToggle() {
 };
 
 export function renderHeader() {
+  const currentPage = window.location.pathname;
   const headerElement = document.querySelector('.js-header');
   const headerHTML = `
       <nav class="flex justify-between items-center">
         <!-- Logo -->
         <img class="w-[60px] duration-170 hover:scale-105" src="/images/agro-kiran-dark.png" alt="-brand-logo" />
         <!-- Nav Links -->
-        <ul class="hidden md:flex gap-8 text-white ml-20 flex-1 justify-center">
+        <ul class="hidden md:flex gap-8 text-white ml-20 flex-1 justify-center h-max">
           <li>
-            <a class="nav-links" href="/index.html">Home</a>
-          </li>
-          <li><a class="nav-links" href="/shop.html">Shop</a></li>
-          <li>
-            <a class="nav-links" href="#">About</a>
+            <a class="nav-links ${currentPage === '/index.html' || currentPage === '/' ? 'active-li-header' : ''}" href="/index.html">Home</a>
           </li>
           <li>
-            <a class="nav-links" href="#">Contact</a>
+            <a class="nav-links ${currentPage === '/shop.html' ? 'active-li-header' : ''}" href="/shop.html">Shop</a>
+          </li>
+          <li>
+            <a class="nav-links ${currentPage === '/about.html' ? 'active-li-header' : ''}" href="/about.html">About</a>
+          </li>
+          <li>
+            <a class="nav-links ${currentPage === '/contact.html' ? 'active-li-header' : ''}" href="/contact.html">Contact</a>
           </li>
         </ul>
         <!-- Cart Icon -->

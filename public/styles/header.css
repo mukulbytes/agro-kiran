@@ -4,7 +4,9 @@
 .user-actions {
   @apply flex justify-center items-center py-[2px] px-[10px] border-2 border-white  font-medium text-[0.9rem] rounded-full duration-155 ease-in-out hover:border-secondary hover:text-secondary;
 }
-
+.active-li-header{
+  @apply decoration-secondary underline underline-offset-25 decoration-5 text-secondary font-bold;
+}
 .icons {
   position: absolute;
   top: 45%;
