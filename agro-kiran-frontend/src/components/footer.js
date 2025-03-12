@@ -1,9 +1,11 @@
+import brandLogo from '../assets/agro-kiran-dark.png';
+
 export function renderFooter() {
     const footerContainer = document.querySelector(".js-footer");
     const footerHTML = `
     <!-- Logo -->
       <div class="flex h-full md:h-1/2 lg:pl-10 items-center xs:max-md:hidden">
-        <img src="images/agro-kiran-dark.png" class="h-20" alt="" />
+        <img src="${brandLogo}" class="h-20" alt="" />
       </div>
       <!-- Customer Support -->
       <div class="flex justify-center flex-col">

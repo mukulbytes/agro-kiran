@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
 @import "tailwindcss";
-@import "./public/styles/header.css";
-@import "./public/styles/hero.css";
-@import "./public/styles/main.css";
-@import "./public/styles/testimonials.css";
-@import "./public/styles/footer.css";
+@import "./component-styles/header.css";
+@import "./component-styles/hero.css";
+@import "./component-styles/main.css";
+@import "./component-styles/testimonials.css";
+@import "./component-styles/footer.css";
 
 /* @import "./hero.css"; */
 

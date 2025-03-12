@@ -1,3 +1,5 @@
+import flower from "../assets/flower-primary-stroke.png"
+import prodimg from "../../public/images/5kg-veggie-plus.webp"
 const products = [
     {
         id: "urea-plus",
@@ -339,11 +341,11 @@ export function renderFeaturedProducts() {
         .forEach(product => {
             productHTML += `
                 <div class="grid grid-cols-1 lg:grid-cols-2 relative bg-accent rounded-2xl shadow-xs z-8 p-3 lg:py-10 lg:pr-10 justify-center items-center max-w-[50rem]">
-                    <img src="images/flower-primary-stroke.png" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
+                    <img src="${flower}" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
                     
                     <!-- Image Div -->
                     <div class="image-test relative flex items-center justify-center bg-center bg-no-repeat bg-contain bg-[url(../images/Product-bg.png)]">
-                        <img src="${product.img["20kg"]}" class="h-[13rem] md:h-[15rem] xl:h-[20rem] z-[2] drop-shadow-2xl" alt="${product.title}" />
+                        <img src="${prodimg}" class="h-[13rem] md:h-[15rem] xl:h-[20rem] z-[2] drop-shadow-2xl" alt="${product.title}" />
                     </div>
                     
                     <!-- Product Details Div -->
@@ -366,5 +368,37 @@ export function renderFeaturedProducts() {
             `;
         });
 
+    container.innerHTML = productHTML;
+}
+
+export function renderProductsGrid() {
+    const container = document.querySelector('.js-products-grid');
+    let productHTML = "";
+    products.forEach(product => {
+        productHTML += `
+        <div class="grid grid-cols-1 gap-2 relative bg-accent rounded-2xl shadow-xs z-8 p-5 justify-center items-center">
+            <img src="images/flower-primary-stroke.png" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
+            
+            <!-- Image Div -->
+            <div class="relative flex items-center justify-center bg-center bg-no-repeat bg-contain bg-[url(../images/Product-bg.png)]">
+                <img src="${product.img["20kg"]}" class="h-[13rem] drop-shadow-2xl z-[2]" alt="${product.title}" />
+            </div>
+            
+            <!-- Product Details Div -->
+            <div class="flex flex-col gap-0.5 text-white">
+                <h2 class="text-secondary text-[1.8rem] font-bold whitespace-nowrap">${product.title}</h2>
+                <p class="text-pretty text-sm line-clamp-4">${product.shortDesc}</p>
+                <ul class="text-sm list-disc text-secondary pl-4 mt-3">
+                    <li>${product.highlights.li1}</li>
+                    <li>${product.highlights.li2}</li>
+                    <li>${product.highlights.li3}</li>
+                </ul>
+                <p class="text-[2rem] font-extrabold">${product.price["20kg"].toLocaleString("en-IN", { style: "currency", currency: "INR", minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
+                <button class="rounded-lg bg-primary py-1.5 px-5 text-sm font-bold text-white duration-100 ease-in-out border-2 border-primary hover:border-secondary hover:text-secondary">
+                    Add to cart
+                </button>
+            </div>
+        </div>`;
+    });
     container.innerHTML = productHTML;
 }

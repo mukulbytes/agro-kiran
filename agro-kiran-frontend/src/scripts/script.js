@@ -1,8 +1,8 @@
-import { renderFooter } from "./public/components/footer.js";
-import { renderHeader, navToggle, toggleUserActions } from "./public/components/header.js";
-import { renderHighlights } from "./public/components/keyhighlights.js";
-import { renderFeaturedProducts } from "./public/components/products.js";
-import { initSwiper, renderTestimonials } from "./public/components/testimonials.js";
+import { renderFooter } from "../components/footer.js";
+import { renderHeader, navToggle, toggleUserActions } from "../components/header.js";
+import { renderHighlights } from "../components/keyhighlights.js";
+import { renderFeaturedProducts } from "../components/products.js";
+import { initSwiper, renderTestimonials } from "../components/testimonials.js";
 
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -1,29 +1,36 @@
-const keyHighlights = [{
-  icon: "images/icons/Icon-Smart-Nutrition-Dark.png",
-  alt: "smart-nutrition-icon",
-  heading: "Smart Nutrition",
-  content: "AI-powered recommendations ensure precise fertilizers for crops and growth stages."
+import smartNutrition from "../assets/icons/Icon-Smart-Nutrition-Dark.png";
+import certifiedQuality from "../assets/icons/Icon-Certified-Quality-Dark.png";
+import easyApplication from "../assets/icons/Icon-Easy-Application-Dark.png";
+import diverseRange from "../assets/icons/Icon-Diverse-Range-Dark.png";
+import flower from "../assets/hero-Animated.png";
 
-},
-{
-  icon: "images/icons/Icon-Certified-Quality-Dark.png",
-  alt: "certified-quality-icon",
-  heading: "Certified Quality",
-  content: "Compliant with FCO & BIS, lab-tested for purity, effectiveness, and safety."
-},
-{
-  icon: "images/icons/Icon-Easy-Application-Dark.png",
-  alt: "easy-application-icon",
-  heading: "Easy Application",
-  content: "Available in granular, liquid, and foliar forms for hassle-free usage."
-},
-{
-  icon: "images/icons/Icon-Diverse-Range-Dark.png",
-  alt: "diverse-range-icon",
-  heading: "Diverse Range",
-  content: "Organic, inorganic, slow-release, and specialty fertilizers in various forms."
-}
-]
+const keyHighlights = [
+  {
+    icon: smartNutrition,
+    alt: "smart-nutrition-icon",
+    heading: "Smart Nutrition",
+    content: "AI-powered recommendations ensure precise fertilizers for crops and growth stages."
+  },
+  {
+    icon: certifiedQuality,
+    alt: "certified-quality-icon",
+    heading: "Certified Quality",
+    content: "Compliant with FCO & BIS, lab-tested for purity, effectiveness, and safety."
+  },
+  {
+    icon: easyApplication,
+    alt: "easy-application-icon",
+    heading: "Easy Application",
+    content: "Available in granular, liquid, and foliar forms for hassle-free usage."
+  },
+  {
+    icon: diverseRange,
+    alt: "diverse-range-icon",
+    heading: "Diverse Range",
+    content: "Organic, inorganic, slow-release, and specialty fertilizers in various forms."
+  }
+];
+
 export function renderHighlights() {
   const highlightsContainer = document.querySelector('.js-key-highlights-container');
 
@@ -34,12 +41,12 @@ export function renderHighlights() {
             <div class="upper relative bg-accent w-[100%] py-3 flex justify-center items-center overflow-clip">
               <img src="${item.icon}" class="z-2 size-15 drop-shadow-md duration-200 ease-in-out hover:-translate-y-1 hover:drop-shadow-2xl" alt="${item.alt}" />
               <img
-                src="images/hero-Animated.png"
+                src="${flower}"
                 class="absolute size-25 -right-10 -top-10 motion-safe:animate-[spin_20s_linear_infinite_forwards] drop-shadow-md"
                 alt=""
               />
               <img
-                src="images/hero-Animated.png"
+                src="${flower}"
                 class="absolute size-25 -left-10 -bottom-10 motion-safe:animate-[spin_20s_linear_infinite_forwards] drop-shadow-md"
                 alt=""
               />

@@ -1,3 +1,5 @@
+import brandLogo from '../assets/agro-kiran-dark.png';
+
 export let loggedIn = false;
 
 export function toggleUserActions(loggedIn) {
@@ -31,7 +33,7 @@ export function renderHeader() {
   const headerHTML = `
       <nav class="flex justify-between items-center">
         <!-- Logo -->
-        <img class="w-[60px] duration-170 hover:scale-105" src="/images/agro-kiran-dark.png" alt="-brand-logo" />
+        <img class="w-[60px] duration-170 hover:scale-105" src="${brandLogo}" alt="-brand-logo" />
         <!-- Nav Links -->
         <ul class="hidden md:flex gap-8 text-white ml-20 flex-1 justify-center h-max">
           <li>

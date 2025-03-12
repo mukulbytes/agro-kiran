@@ -1,39 +1,44 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
+import rajesh from "../assets/testimonials/q11nkooa09gjgotb3lod.webp"
+import meera from "../assets/testimonials/ymvejqae5iudsfqrhf1q.webp"
+import amit from "../assets/testimonials/ujbdrkntzgnzjlbeey08.webp"
+import sumanth from "../assets/testimonials/wft3kpdf28rkzwj87uaw.webp"
+import atul from "../assets/testimonials/e75hz572eyeytnszmxl5.webp";
 
 const testimonials = [
     {
         rating: 5,
         testimonial: "Agro Kiran made fertilizer selection so easy! The AI recommendations were spot-on, and my crop yield has improved significantly.",
-        img: "images/testimonials/q11nkooa09gjgotb3lod.webp",
+        img: rajesh,
         name: "Rajesh Patel",
         designation: "Horticulturist"
     },
     {
         rating: 4.5,
         testimonial: "Great product quality and fast delivery. The fertilizers are exactly as described, and my soil health has improved.",
-        img: "images/testimonials/ymvejqae5iudsfqrhf1q.webp",
+        img: meera,
         name: "Meera Devi",
         designation: "Organic Farmer"
     },
     {
         rating: 4.8,
         testimonial: "I love the wide variety of organic and synthetic fertilizers available. The website is user-friendly and easy to navigate.",
-        img: "images/testimonials/ujbdrkntzgnzjlbeey08.webp",
+        img: amit,
         name: "Amit Verma",
         designation: "Vegetable Grower"
     },
     {
         rating: 5,
         testimonial: "Customer support is excellent! They guided me through selecting the right fertilizer, and it worked wonders for my farm.",
-        img: "images/testimonials/wft3kpdf28rkzwj87uaw.webp",
+        img: sumanth,
         name: "Sumanth Reddy",
         designation: "Rice Farmer"
     },
     {
         rating: 4.7,
         testimonial: "The AI chatbot is really helpful. It suggested the best fertilizer for my crops, and I’ve seen a visible improvement in plant health.",
-        img: "images/testimonials/e75hz572eyeytnszmxl5.webp",
+        img: atul,
         name: "Atul Yadav",
         designation: "Wheat Farmer"
     }
