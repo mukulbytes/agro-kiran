@@ -1,11 +1,13 @@
 import flower from "../assets/flower-primary-stroke.png"
-import prodimg from "../../public/images/5kg-veggie-plus.webp"
+import productbg from "../assets/Product-bg.png"
+const bgURL = new URL(productbg, import.meta.url).href;
+
 const products = [
     {
         id: "urea-plus",
         img: {
-            "5kg": "./images/products/5kg/5kg-urea-plus.png",
-            "20kg": "./images/products/20kg/20kg-urea-plus.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861471/5kg-urea-plus_u9dnym.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861475/20kg-urea-plus_ie49x8.webp"
         },
         title: "Urea Plus",
         shortDesc: "A high nitrogen fertilizer containing 46% nitrogen for rapid vegetative growth.",
@@ -28,8 +30,8 @@ const products = [
     {
         id: "phos-boost",
         img: {
-            "5kg": "./images/products/5kg/5kg-phos-boost.png",
-            "20kg": "./images/products/20kg/20kg-phos-boost.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861472/5kg-phos-boost_a3i6tx.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861474/20kg-phos-boost_acf1zd.webp"
         },
         title: "Phos Boost",
         shortDesc: "A concentrated phosphorus fertilizer to promote root development and flowering.",
@@ -52,8 +54,8 @@ const products = [
     {
         id: "potash-pro",
         img: {
-            "5kg": "./images/products/5kg/5kg-potash-pro.png",
-            "20kg": "./images/products/20kg/20kg-potash-pro.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861472/5kg-potash-pro_tg0bfn.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861474/20kg-potash-pro_a0yb9y.webp"
         },
         title: "Potash Pro",
         shortDesc: "A potassium fertilizer with 60% soluble potash for plant health and disease resistance.",
@@ -76,8 +78,8 @@ const products = [
     {
         id: "balance-mix",
         img: {
-            "5kg": "./images/products/5kg/5kg-balance-mix.png",
-            "20kg": "./images/products/20kg/20kg-balance-mix.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861470/5kg-balance-mix_wjmuhj.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861472/20kg-balance-mix_peto4x.webp"
         },
         title: "Balance Mix",
         shortDesc: "An all-purpose fertilizer providing balanced nitrogen, phosphorus, and potassium.",
@@ -100,8 +102,8 @@ const products = [
     {
         id: "veggie-plus",
         img: {
-            "5kg": "./images/products/5kg/5kg-veggie-plus.png",
-            "20kg": "./images/products/20kg/20kg-veggie-plus.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861472/5kg-veggie-plus_jzchd7.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861476/20kg-veggie-plus_erymja.webp"
         },
         title: "Veggie Plus",
         shortDesc: "A balanced fertilizer tailored for vegetable gardens, promoting leafy growth and fruiting.",
@@ -124,8 +126,8 @@ const products = [
     {
         id: "eco-grow",
         img: {
-            "5kg": "./images/products/5kg/5kg-eco-grow.png",
-            "20kg": "./images/products/20kg/20kg-eco-grow.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861470/5kg-eco-grow_d7focz.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861473/20kg-eco-grow_mm8pr7.webp"
         },
         title: "Eco Grow",
         shortDesc: "A nutrient-rich, all-natural compost to improve soil structure and microbial health.",
@@ -147,8 +149,8 @@ const products = [
     {
         id: "bio-boost",
         img: {
-            "5kg": "./images/products/5kg/5kg-bio-boost.png",
-            "20kg": "./images/products/20kg/20kg-bio-boost.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861470/5kg-bio-boost_xnyxfm.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861473/20kg-bio-boost_vlhuev.webp"
         },
         title: "Bio Boost",
         shortDesc: "A certified organic manure blend enriched with micronutrients for sustainable soil fertility.",
@@ -170,8 +172,8 @@ const products = [
     {
         id: "time-feed",
         img: {
-            "5kg": "./images/products/5kg/5kg-time-feed.png",
-            "20kg": "./images/products/20kg/20kg-time-feed.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861470/5kg-time-feed_ll2iqy.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861475/20kg-time-feed_rfkb2r.webp"
         },
         title: "Time Feed",
         shortDesc: "A balanced slow-release fertilizer providing nutrients over 8-10 weeks.",
@@ -193,8 +195,8 @@ const products = [
     {
         id: "ultra-guard",
         img: {
-            "5kg": "./images/products/5kg/5kg-ultra-guard.png",
-            "20kg": "./images/products/20kg/20kg-ultra-guard.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861471/5kg-ultra-guard_iyj4t2.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861475/20kg-ultra-guard_fbwjrc.webp"
         },
         title: "Ultra Guard",
         shortDesc: "A premium slow-release fertilizer minimizing nutrient loss while ensuring steady growth.",
@@ -216,8 +218,8 @@ const products = [
     {
         id: "liquid-max",
         img: {
-            "5kg": "./images/products/5kg/5kg-liquid-max.png",
-            "20kg": "./images/products/20kg/20kg-liquid-max.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861472/5kg-liquid-max_wodw6q.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861474/20kg-liquid-max_c2eidm.webp"
         },
         title: "Liquid Max",
         shortDesc: "A fast-acting water-soluble fertilizer concentrate for immediate nutrient uptake.",
@@ -239,8 +241,8 @@ const products = [
     {
         id: "seaweed-gold",
         img: {
-            "5kg": "./images/products/5kg/5kg-seaweed-gold.png",
-            "20kg": "./images/products/20kg/20kg-seaweed-gold.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861473/5kg-seaweed-gold_ad1fpv.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861475/20kg-seaweed-gold_ufyd0d.webp"
         },
         title: "Seaweed Gold",
         shortDesc: "An organic seaweed extract fertilizer enriched with phytohormones and trace minerals.",
@@ -262,8 +264,8 @@ const products = [
     {
         id: "leaf-guard",
         img: {
-            "5kg": "./images/products/5kg/5kg-leaf-guard.png",
-            "20kg": "./images/products/20kg/20kg-leaf-guard.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861471/5kg-leaf-guard_tpvazw.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861473/20kg-leaf-guard_l2pyln.webp"
         },
         title: "Leaf Guard",
         shortDesc: "A foliar spray containing essential micronutrients to correct deficiencies quickly.",
@@ -285,8 +287,8 @@ const products = [
     {
         id: "bloom-power",
         img: {
-            "5kg": "./images/products/5kg/5kg-bloom-power.png",
-            "20kg": "./images/products/20kg/20kg-bloom-power.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861472/5kg-bloom-power_sb7n0u.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861473/20kg-bloom-power_eqamia.webp"
         },
         title: "Bloom Power",
         shortDesc: "A bloom enhancer designed to increase flower production and color vibrancy.",
@@ -308,8 +310,8 @@ const products = [
     {
         id: "root-boost",
         img: {
-            "5kg": "./images/products/5kg/5kg-root-boost.png",
-            "20kg": "./images/products/20kg/20kg-root-boost.png"
+            "5kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861473/5kg-root-boost_bimwac.webp",
+            "20kg": "https://res.cloudinary.com/dgoc0j8ll/image/upload/v1741861475/20kg-root-boost_v9mjtk.webp"
         },
         title: "Root Boost",
         shortDesc: "A starter fertilizer for seedlings and transplants, enhancing root establishment.",
@@ -331,7 +333,22 @@ const products = [
 
 ];
 
+export function listenerForProductCard() {
+    document.querySelectorAll(".js-product-card").forEach(card => {
+        card.addEventListener("click", function (event) {
 
+            if (event.target.closest(".js-add-to-cart")) {
+                return;
+            }
+
+            // Get product ID from data attribute
+            const productId = this.getAttribute("data-id");
+
+            // Navigate to product page
+            window.location.href = `/product.html?id=${productId}`;
+        });
+    });
+}
 export function renderFeaturedProducts() {
     const container = document.querySelector('.js-featured-products-container');
     let productHTML = "";
@@ -340,17 +357,17 @@ export function renderFeaturedProducts() {
         .filter(product => product.featured) // Only include featured products
         .forEach(product => {
             productHTML += `
-                <div class="grid grid-cols-1 lg:grid-cols-2 relative bg-accent rounded-2xl shadow-xs z-8 p-3 lg:py-10 lg:pr-10 justify-center items-center max-w-[50rem]">
+                <div class="js-product-card grid grid-cols-1 lg:grid-cols-2 relative bg-accent rounded-2xl shadow-xs z-8 p-3 lg:py-10 lg:pr-10 justify-center items-center max-w-[50rem] ease-in-out duration-200 hover:shadow-2xl hover:-translate-y-1" data-id="${product.id}">
                     <img src="${flower}" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
                     
                     <!-- Image Div -->
-                    <div class="image-test relative flex items-center justify-center bg-center bg-no-repeat bg-contain bg-[url(../images/Product-bg.png)]">
-                        <img src="${prodimg}" class="h-[13rem] md:h-[15rem] xl:h-[20rem] z-[2] drop-shadow-2xl" alt="${product.title}" />
+                    <div class="image-test relative flex items-center justify-center bg-center bg-no-repeat bg-contain" style="background-image: url('${bgURL}') !important;">
+                        <img src="${product.img["20kg"]}" class="h-[13rem] md:h-[15rem] xl:h-[20rem] z-[2] drop-shadow-2xl" alt="${product.title}" />
                     </div>
                     
                     <!-- Product Details Div -->
                     <div class="flex flex-col gap-0.5 xl:gap-3 lg:pl-10 text-white">
-                        <h2 class="text-secondary text-[1.8rem] xs:max-sm:text-[1.45rem] max-lg:self-center font-bold whitespace-nowrap">${product.title}</h2>
+                        <a href="/product.html?id=${product.id}" class="hover:underline text-secondary text-[1.8rem] xs:max-sm:text-[1.45rem] max-lg:self-center font-bold whitespace-nowrap">${product.title}</a >
                         <p class="text-pretty text-sm/[135%] xl:text-lg/[110%] line-clamp-4 lg:hidden xl:block">
                             ${product.shortDesc}
                         </p>
@@ -360,7 +377,7 @@ export function renderFeaturedProducts() {
                             <li>${product.highlights.li3}</li>
                         </ul>
                         <p class="text-[2rem] font-extrabold">${product.price["20kg"].toLocaleString("en-IN", { style: "currency", currency: "INR", minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
-                        <button class="rounded-lg max-w-40 bg-primary py-1.5 px-5 text-sm font-bold text-white duration-100 ease-in-out border-2 border-primary hover:border-secondary hover:text-secondary">
+                        <button class="js-add-to-cart rounded-lg max-w-40 bg-primary py-1.5 px-5 text-sm font-bold text-white duration-100 ease-in-out border-2 border-primary hover:border-secondary hover:text-secondary">
                             Add to cart
                         </button>
                     </div>
@@ -369,6 +386,7 @@ export function renderFeaturedProducts() {
         });
 
     container.innerHTML = productHTML;
+    listenerForProductCard();
 }
 
 export function renderProductsGrid() {
@@ -376,17 +394,17 @@ export function renderProductsGrid() {
     let productHTML = "";
     products.forEach(product => {
         productHTML += `
-        <div class="grid grid-cols-1 gap-2 relative bg-accent rounded-2xl shadow-xs z-8 p-5 justify-center items-center">
+        <div class="js-product-card grid grid-cols-1 gap-2 relative bg-accent rounded-2xl shadow-xs z-8 p-5 justify-center items-center ease-in-out duration-200 hover:shadow-2xl" data-id="${product.id}">
             <img src="images/flower-primary-stroke.png" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
             
             <!-- Image Div -->
-            <div class="relative flex items-center justify-center bg-center bg-no-repeat bg-contain bg-[url(../images/Product-bg.png)]">
+            <div class="relative flex items-center justify-center bg-center bg-no-repeat bg-contain" style="background-image: url('${bgURL}') !important;">
                 <img src="${product.img["20kg"]}" class="h-[13rem] drop-shadow-2xl z-[2]" alt="${product.title}" />
             </div>
             
             <!-- Product Details Div -->
             <div class="flex flex-col gap-0.5 text-white">
-                <h2 class="text-secondary text-[1.8rem] font-bold whitespace-nowrap">${product.title}</h2>
+                <a href="/product.html?id=${product.id}" class="hover:underline text-secondary text-[1.8rem] font-bold whitespace-nowrap">${product.title}</a>
                 <p class="text-pretty text-sm line-clamp-4">${product.shortDesc}</p>
                 <ul class="text-sm list-disc text-secondary pl-4 mt-3">
                     <li>${product.highlights.li1}</li>
@@ -394,11 +412,12 @@ export function renderProductsGrid() {
                     <li>${product.highlights.li3}</li>
                 </ul>
                 <p class="text-[2rem] font-extrabold">${product.price["20kg"].toLocaleString("en-IN", { style: "currency", currency: "INR", minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
-                <button class="rounded-lg bg-primary py-1.5 px-5 text-sm font-bold text-white duration-100 ease-in-out border-2 border-primary hover:border-secondary hover:text-secondary">
+                <button class="js-add-to-cart rounded-lg bg-primary py-1.5 px-5 text-sm font-bold text-white duration-100 ease-in-out border-2 border-primary hover:border-secondary hover:text-secondary">
                     Add to cart
                 </button>
             </div>
         </div>`;
     });
     container.innerHTML = productHTML;
+    listenerForProductCard();
 }

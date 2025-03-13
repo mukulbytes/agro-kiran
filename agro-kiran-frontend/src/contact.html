@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Agro Kiran</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="js-header-content"></div>
+    <main>
+      <!-- CONTACT US -->
+      <section class="relative bg-primary mx-auto shadow-2xl flex flex-col justify-center items-center gap-10 overflow-clip p-5">
+        <h2
+          class="z-2 text-white text-2xl sm:text-3xl md:text-4xl font-bold underline underline-offset-10 decoration-secondary decoration-5 font-sans"
+        >
+          CONTACT US
+        </h2>
+        <img src="assets/flower-light-stroke.png" class="absolute size-100 lg:size-130 xl:size-150 -right-80" alt="" />
+        <img src="assets/flower-light-stroke.png" class="absolute size-100 lg:size-130 xl:size-150 -left-80" alt="" />
+        <p class="text-white z-5 max-w-220 text-lg text-center">
+          Have questions? Need assistance? Reach out to us, and our team will be happy to help you with your queries.
+        </p>
+      </section>
+
+      <!-- Contact Form & Details -->
+      <section class="overflow-hidden flex flex-col justify-center items-center p-10 gap-10 bg-amber-100">
+        <h2
+          class="text-primary text-2xl sm:text-3xl md:text-4xl font-bold underline underline-offset-10 decoration-secondary decoration-5 font-sans uppercase"
+        >
+          Get in Touch
+        </h2>
+        <div class="flex flex-col md:flex-row gap-10 w-full max-w-4xl">
+          <!-- Contact Details -->
+          <div class="flex flex-col gap-5 text-primary w-full md:w-1/2">
+            <div>
+              <h3 class="text-lg font-bold uppercase">Our Office</h3>
+              <p class="text-[1rem]/[1.2]">
+                Agro Kiran Pvt. Ltd.<br />G-24, Race Course Tower,<br />
+                Race Course Circle,Vadodara,<br />
+                Gujarat, 390015, India
+              </p>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold uppercase">Email</h3>
+              <p>support@agrokiran.com</p>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold uppercase">Phone</h3>
+              <p>1800 0000 00</p>
+            </div>
+          </div>
+          <!-- Contact Form -->
+          <form class="flex flex-col gap-5 w-full md:w-1/2">
+            <input type="text" placeholder="Your Name" class="p-3 border border-primary rounded-lg" required />
+            <input type="email" placeholder="Your Email" class="p-3 border border-primary rounded-lg" required />
+            <textarea placeholder="Your Message" class="p-3 border border-primary rounded-lg h-32" required></textarea>
+            <button
+              type="submit"
+              class="bg-primary text-white font-bold px-5 py-3 rounded-lg border-4 border-accent hover:border-secondary hover:text-secondary transition"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="relative overflow-hidden flex flex-col justify-center items-center p-10 gap-5 bg-primary text-white text-center">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold underline underline-offset-10 decoration-secondary decoration-5 font-sans uppercase">Let's Connect!</h2>
+        <img src="assets/flower-light-stroke.png" class="absolute size-100 lg:size-130 xl:size-150 -right-80" alt="" />
+        <img src="assets/flower-light-stroke.png" class="absolute size-100 lg:size-130 xl:size-150 -left-80" alt="" />
+        <p>Follow us on social media for the latest updates, offers, and agricultural insights.</p>
+        <div class="flex gap-5 text-2xl">
+          <a href="#" class="hover:text-secondary"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="hover:text-secondary"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="hover:text-secondary"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-secondary"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </section>
+      <!-- Stay Connected -->
+      <section class="overflow-hidden flex flex-col justify-center items-center p-10 gap-5 bg-amber-100">
+
+        <p class="text-primary text-lg text-center max-w-220">
+          Get the latest updates on new products, exclusive offers, and expert farming tips delivered straight to your inbox. Follow us <span class="font-bold">Subscribe to our newsletter</span> to stay informed and be part of the Agro Kiran community!
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <input type="email" placeholder="Enter your email" class="p-3 rounded-lg text-primary border-2 border-accent w-72" />
+          <button class="hero-btn bg-primary text-white border-accent hover:text-secondary hover:border-secondary">Subscribe</button>
+        </div>
+       
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="js-footer p-5 bg-primary grid grid-cols-2 xs:max-md:grid-cols-3 md:grid-cols-4 gap-5 items-start w-full overflow-clip"></footer>
+
+    <script src="https://kit.fontawesome.com/10b097dc47.js" crossorigin="anonymous"></script>
+    <script type="module" src="scripts/contact.js"></script>
+  </body>
+</html>
