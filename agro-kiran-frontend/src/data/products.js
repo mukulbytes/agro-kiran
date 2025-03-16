@@ -1,8 +1,10 @@
 import flower from "../assets/flower-primary-stroke.png"
 import productbg from "../assets/Product-bg.png"
+import { listenerForAddToCart } from "./cart.js";
+
 const bgURL = new URL(productbg, import.meta.url).href;
 
-const products = [
+export const products = [
     {
         id: "urea-plus",
         img: {
@@ -333,6 +335,7 @@ const products = [
 
 ];
 
+
 export function listenerForProductCard() {
     document.querySelectorAll(".js-product-card").forEach(card => {
         card.addEventListener("click", function (event) {
@@ -361,7 +364,7 @@ export function renderFeaturedProducts() {
                     <img src="${flower}" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
                     
                     <!-- Image Div -->
-                    <div class="image-test relative flex items-center justify-center bg-center bg-no-repeat bg-contain" style="background-image: url('${bgURL}') !important;">
+                    <div class="relative flex items-center justify-center bg-center bg-no-repeat bg-contain" style="background-image: url('${bgURL}') !important;">
                         <img src="${product.img["20kg"]}" class="h-[13rem] md:h-[15rem] xl:h-[20rem] z-[2] drop-shadow-2xl" alt="${product.title}" />
                     </div>
                     
@@ -387,6 +390,7 @@ export function renderFeaturedProducts() {
 
     container.innerHTML = productHTML;
     listenerForProductCard();
+    listenerForAddToCart();
 }
 
 export function renderProductsGrid() {
@@ -420,4 +424,112 @@ export function renderProductsGrid() {
     });
     container.innerHTML = productHTML;
     listenerForProductCard();
+    listenerForAddToCart();
 }
+
+export function renderSingleProduct() {
+    const container = document.querySelector('.js-single-product-container');
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+
+    if (!productId) {
+        container.innerHTML = `<p class="text-white text-lg">Product not found.</p>`;
+        return;
+    }
+
+    const product = products.find(p => p.id === productId);
+
+    if (!product) {
+        container.innerHTML = `<p class="text-white text-lg">Product not found.</p>`;
+        return;
+    }
+
+    let selectedVariant = "20kg";
+
+    function updateProductView() {
+        const productImage = document.querySelector(".js-product-image");
+        const productPrice = document.querySelector(".js-product-price");
+        const selectedInput = document.querySelector("input[name='variant']:checked");
+
+        if (selectedInput) {
+            selectedVariant = selectedInput.value;
+        }
+
+        productImage.src = product.img[selectedVariant];
+        productPrice.textContent = product.price[selectedVariant].toLocaleString("en-IN", {
+            style: "currency", currency: "INR", minimumFractionDigits: 0, maximumFractionDigits: 0
+        });
+
+        // Update radio button markers
+        document.querySelectorAll(".js-variant-radio").forEach(radio => {
+            const marker = radio.nextElementSibling.querySelector("span");
+            if (radio.checked) {
+                marker.classList.remove("hidden");
+            } else {
+                marker.classList.add("hidden");
+            }
+        });
+    }
+
+    container.innerHTML = `        
+        <div class="js-product-card grid grid-cols-1 sm:grid-cols-2 relative bg-accent rounded-2xl shadow-xs z-8 p-3 sm:py-10 max-w-[50rem] items-center" data-id="${product.id}">
+            <img src="${flower}" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
+
+            <!-- Image Div -->
+            <div class="relative flex items-center justify-center bg-center bg-no-repeat bg-contain" style="background-image: url('${bgURL}') !important">
+                <img src="${product.img[selectedVariant]}" class="js-product-image h-[13rem]  sm:h-[20rem] z-[2] drop-shadow-2xl" alt="${product.title}" />
+            </div>
+
+            <!-- Product Details Div -->
+            <div class="flex flex-col gap-5 sm:gap-3 sm:pl-10 text-white">
+                <h2 class="text-secondary text-[1.8rem] max-sm:self-center font-bold whitespace-nowrap">${product.title}</h2>
+                <p class="text-pretty text-lg/[110%] max-sm:text-center line-clamp-4">${product.shortDesc}</p>
+                
+                <ul class="text-lg/[100%] pl-4 sm:p-0 list-disc text-secondary sm:mt-3">
+                    <li>${product.highlights.li1}</li>
+                    <li>${product.highlights.li2}</li>
+                    <li>${product.highlights.li3}</li>
+                </ul>
+
+                <!-- Variant Selection -->
+                <div class="flex flex-row gap-3 mt-3">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="variant" value="5kg" class="js-variant-radio hidden" />
+                        <span class="w-5 h-5 border-2 border-white rounded-full flex items-center justify-center">
+                            <span class="w-3 h-3 bg-secondary rounded-full hidden"></span>
+                        </span>
+                        <span class="font-bold">5kg</span>
+                    </label>
+
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="variant" value="20kg" class="js-variant-radio hidden" checked />
+                        <span class="w-5 h-5 border-2 border-white rounded-full flex items-center justify-center">
+                            <span class="w-3 h-3 bg-secondary rounded-full"></span>
+                        </span>
+                        <span class="font-bold">20kg</span>
+                    </label>
+                </div>
+
+                <p class="js-product-price text-[2rem] font-extrabold mt-2">
+                    ${product.price[selectedVariant].toLocaleString("en-IN", {
+        style: "currency", currency: "INR", minimumFractionDigits: 0, maximumFractionDigits: 0
+    })}
+                </p>
+
+                <button class="js-add-to-cart max-sm:self-center rounded-lg max-w-40 bg-primary py-1.5 px-5 text-sm font-bold text-white duration-100 ease-in-out border-2 border-primary hover:border-secondary hover:text-secondary">
+                    Add to cart
+                </button>
+            </div>
+        </div>
+    `;
+
+    // Attach event listeners to variant radio buttons
+    document.querySelectorAll(".js-variant-radio").forEach(radio => {
+        radio.addEventListener("change", updateProductView);
+    });
+
+    updateProductView(); // Ensure initial state is correct
+    listenerForAddToCart();
+}
+
+

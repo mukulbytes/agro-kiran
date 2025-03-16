@@ -36,7 +36,7 @@ export function renderHeader() {
       <div class="h-20 bg-primary"></div>
 
       <!-- Header Navigation -->
-      <header class="fixed top-0 right-0 left-0 z-10 w-full py-[15px] px-[35px] text-[1.05rem] bg-primary h-20">
+      <header class="fixed top-0 right-0 left-0 z-10 w-full py-[15px] px-[35px] text-[1.05rem] bg-primary h-20 shadow-2xl">
         <nav class="flex justify-between items-center">
           <!-- Logo -->
           <img class="w-[60px] duration-170 hover:scale-105" src="${brandLogo}" alt="-brand-logo" />
@@ -56,13 +56,13 @@ export function renderHeader() {
             </li>
           </ul>
           <!-- Cart Icon -->
-          <div class="mr-4 hidden md:flex items-center">
+          <a href="/cart.html" class="mr-4 hidden md:flex items-center">
             <span class="relative flex size-3">
               <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75 -top-2.5 left-2.5"></span>
               <span class="relative inline-flex size-3 rounded-full bg-secondary -top-2.5 left-2.5"></span>
             </span>
             <i class="fa-solid fa-cart-shopping text-white text-[20px]"></i>
-          </div>
+          </a>
 
           <!-- Login Signup -->
           <div class="hidden md:flex gap-2 items-center justify-center">
@@ -120,13 +120,13 @@ export function renderHeader() {
           <!-- User Action -->
           <div class="flex gap-2 items-center border-t-2 border-t-secondary mt-5 pt-5">
             <!-- Cart -->
-            <div class="mr-4 flex items-center">
+            <a href="/cart.html" class="mr-4 flex items-center">
               <span class="relative flex size-3">
                 <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75 -top-2.5 left-2.5"></span>
                 <span class="relative inline-flex size-3 rounded-full bg-secondary -top-2.5 left-2.5"></span>
               </span>
               <i class="fa-solid fa-cart-shopping text-white text-[20px]"></i>
-            </div>
+            </a>
             <!-- Buttons -->
             <div class="js-ls-btns flex gap-2">
               <a href="" class="user-actions bg-white text-primary hover:bg-transparent">Login</a>

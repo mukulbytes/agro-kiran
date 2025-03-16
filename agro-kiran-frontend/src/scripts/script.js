@@ -1,7 +1,7 @@
 import { renderFooter } from "../components/footer.js";
 import { renderHeader, toggleUserActions } from "../components/header.js";
 import { renderHighlights } from "../components/keyhighlights.js";
-import { renderFeaturedProducts } from "../components/products.js";
+import { renderFeaturedProducts } from "../data/products.js";
 import { initSwiper, renderTestimonials } from "../components/testimonials.js";
 
 

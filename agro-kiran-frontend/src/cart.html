@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - Agro Kiran</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="js-header-content"></div>
+
+    <main class="container mx-auto p-5">
+      <h1 class="text-2xl font-bold text-secondary mb-5">Your Cart</h1>
+      <div class="cart-items space-y-4">
+        <!-- Cart items will be rendered here dynamically -->
+      </div>
+      <div class="mt-5 text-right">
+        <p class="text-lg font-semibold">Total: <span id="cart-total">₹0</span></p>
+        <button id="checkout-btn" class="bg-primary text-white px-4 py-2 rounded-lg mt-2">Proceed to Checkout</button>
+      </div>
+    </main>
+
+    <footer class="js-footer p-5 bg-primary grid grid-cols-2 xs:max-md:grid-cols-3 md:grid-cols-4 gap-5 items-start w-full overflow-clip"></footer>
+    <script src="https://kit.fontawesome.com/10b097dc47.js" crossorigin="anonymous"></script>
+    <script type="module" src="scripts/cartPage.js"></script>
+  </body>
+</html>
