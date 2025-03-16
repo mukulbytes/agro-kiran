@@ -18,7 +18,7 @@
 .flower {
   /* Common for all screen */
   @apply absolute drop-shadow-[-2px_5px_1px_rgba(0,0,0,0.2)] h-[clamp(10rem,7.3529rem+14.1176vw,25rem)] z-[1] motion-safe:animate-[spin_20s_linear_infinite_forwards];
-  
+
   @apply top-[var(--lrt-def)]  sm:top-[var(--lrt-sm)] md:top-[var(--lrt-md)] 2xl:top-[var(--lrt-2xl)];
 }
 .anim-left {

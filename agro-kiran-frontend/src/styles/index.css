@@ -28,3 +28,9 @@ a,
 button {
   @apply focus-visible:outline-amber-400 focus-visible:outline-4;
 }
+.toast {
+  @apply flex items-center gap-3 px-4 py-2 rounded-lg shadow-lg bg-amber-100 text-primary transition-opacity duration-300 ease-in-out;
+}
+.toast i {
+  @apply text-accent; /* Accent color for the checkmark */
+}

@@ -1,4 +1,5 @@
 import brandLogo from '../assets/agro-kiran-dark.png';
+import { cart } from '../data/cart';
 
 export let loggedIn = false;
 
@@ -39,7 +40,9 @@ export function renderHeader() {
       <header class="fixed top-0 right-0 left-0 z-10 w-full py-[15px] px-[35px] text-[1.05rem] bg-primary h-20 shadow-2xl">
         <nav class="flex justify-between items-center">
           <!-- Logo -->
+          <a class="" href="/index.html">
           <img class="w-[60px] duration-170 hover:scale-105" src="${brandLogo}" alt="-brand-logo" />
+          </a>
           <!-- Nav Links -->
           <ul class="hidden md:flex gap-8 text-white ml-20 flex-1 justify-center h-max">
             <li>
@@ -56,8 +59,8 @@ export function renderHeader() {
             </li>
           </ul>
           <!-- Cart Icon -->
-          <a href="/cart.html" class="mr-4 hidden md:flex items-center">
-            <span class="relative flex size-3">
+          <a href="/checkout.html" class="mr-4 hidden md:flex items-center">
+            <span class="relative size-3 ${cart.length ? "flex" : "hidden"}">
               <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75 -top-2.5 left-2.5"></span>
               <span class="relative inline-flex size-3 rounded-full bg-secondary -top-2.5 left-2.5"></span>
             </span>
@@ -120,8 +123,8 @@ export function renderHeader() {
           <!-- User Action -->
           <div class="flex gap-2 items-center border-t-2 border-t-secondary mt-5 pt-5">
             <!-- Cart -->
-            <a href="/cart.html" class="mr-4 flex items-center">
-              <span class="relative flex size-3">
+            <a href="/checkout.html" class="mr-4 flex items-center">
+              <span class="relative size-3 ${cart.length ? "flex" : "hidden"}">
                 <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75 -top-2.5 left-2.5"></span>
                 <span class="relative inline-flex size-3 rounded-full bg-secondary -top-2.5 left-2.5"></span>
               </span>

@@ -1,6 +1,7 @@
 import flower from "../assets/flower-primary-stroke.png"
 import productbg from "../assets/Product-bg.png"
 import { listenerForAddToCart } from "./cart.js";
+import { formatPriceINR } from "../utils/utils.js";
 
 const bgURL = new URL(productbg, import.meta.url).href;
 
@@ -340,7 +341,7 @@ export function listenerForProductCard() {
     document.querySelectorAll(".js-product-card").forEach(card => {
         card.addEventListener("click", function (event) {
 
-            if (event.target.closest(".js-add-to-cart")) {
+            if (event.target.closest(".js-add-to-cart") || event.target.closest("select")) {
                 return;
             }
 
@@ -360,7 +361,7 @@ export function renderFeaturedProducts() {
         .filter(product => product.featured) // Only include featured products
         .forEach(product => {
             productHTML += `
-                <div class="js-product-card grid grid-cols-1 lg:grid-cols-2 relative bg-accent rounded-2xl shadow-xs z-8 p-3 lg:py-10 lg:pr-10 justify-center items-center max-w-[50rem] ease-in-out duration-200 hover:shadow-2xl hover:-translate-y-1" data-id="${product.id}">
+                <div class="js-product-card grid grid-cols-1 lg:grid-cols-2 relative bg-accent rounded-2xl shadow-xs z-8 p-3 lg:py-10 lg:pr-10 justify-center items-center max-w-[50rem] ease-in-out duration-200 hover:shadow-2xl" data-id="${product.id}">
                     <img src="${flower}" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
                     
                     <!-- Image Div -->
@@ -379,7 +380,23 @@ export function renderFeaturedProducts() {
                             <li>${product.highlights.li2}</li>
                             <li>${product.highlights.li3}</li>
                         </ul>
-                        <p class="text-[2rem] font-extrabold">${product.price["20kg"].toLocaleString("en-IN", { style: "currency", currency: "INR", minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
+                        <p class="text-[2rem] font-extrabold">${formatPriceINR(product.price["20kg"])}</p>
+                                <select
+                                    name="quantity-selector"
+                                    id="product-qty"
+                                    class="font-bold text-center w-14 py-1 px-2 mb-1 bg-primary text-white rounded-lg shadow-2xl js-product-quantity-dropdown-${product.id}"
+                                    >
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
                         <button class="js-add-to-cart rounded-lg max-w-40 bg-primary py-1.5 px-5 text-sm font-bold text-white duration-100 ease-in-out border-2 border-primary hover:border-secondary hover:text-secondary">
                             Add to cart
                         </button>
@@ -398,7 +415,7 @@ export function renderProductsGrid() {
     let productHTML = "";
     products.forEach(product => {
         productHTML += `
-        <div class="js-product-card grid grid-cols-1 gap-2 relative bg-accent rounded-2xl shadow-xs z-8 p-5 justify-center items-center ease-in-out duration-200 hover:shadow-2xl" data-id="${product.id}">
+        <div class="js-product-card grid grid-cols-1 gap-2 relative bg-accent rounded-2xl shadow-xs z-8 p-5 justify-center items-end ease-in-out duration-200 hover:shadow-2xl" data-id="${product.id}">
             <img src="images/flower-primary-stroke.png" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
             
             <!-- Image Div -->
@@ -407,15 +424,31 @@ export function renderProductsGrid() {
             </div>
             
             <!-- Product Details Div -->
-            <div class="flex flex-col gap-0.5 text-white">
+            <div class="flex flex-col gap-2 text-white">
                 <a href="/product.html?id=${product.id}" class="hover:underline text-secondary text-[1.8rem] font-bold whitespace-nowrap">${product.title}</a>
                 <p class="text-pretty text-sm line-clamp-4">${product.shortDesc}</p>
-                <ul class="text-sm list-disc text-secondary pl-4 mt-3">
+                <ul class="text-sm list-disc text-secondary pl-4">
                     <li>${product.highlights.li1}</li>
                     <li>${product.highlights.li2}</li>
                     <li>${product.highlights.li3}</li>
                 </ul>
-                <p class="text-[2rem] font-extrabold">${product.price["20kg"].toLocaleString("en-IN", { style: "currency", currency: "INR", minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
+                <p class="text-[2rem] font-extrabold">${formatPriceINR(product.price["20kg"])}</p>
+                <select
+                    name="quantity-selector"
+                    id="product-qty"
+                    class="font-bold text-center w-14 py-1 px-2 mb-1 bg-primary text-white rounded-lg shadow-2xl js-product-quantity-dropdown-${product.id}"
+                    >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
                 <button class="js-add-to-cart rounded-lg bg-primary py-1.5 px-5 text-sm font-bold text-white duration-100 ease-in-out border-2 border-primary hover:border-secondary hover:text-secondary">
                     Add to cart
                 </button>
@@ -456,9 +489,7 @@ export function renderSingleProduct() {
         }
 
         productImage.src = product.img[selectedVariant];
-        productPrice.textContent = product.price[selectedVariant].toLocaleString("en-IN", {
-            style: "currency", currency: "INR", minimumFractionDigits: 0, maximumFractionDigits: 0
-        });
+        productPrice.textContent = formatPriceINR(product.price[selectedVariant]);
 
         // Update radio button markers
         document.querySelectorAll(".js-variant-radio").forEach(radio => {
@@ -511,11 +542,24 @@ export function renderSingleProduct() {
                 </div>
 
                 <p class="js-product-price text-[2rem] font-extrabold mt-2">
-                    ${product.price[selectedVariant].toLocaleString("en-IN", {
-        style: "currency", currency: "INR", minimumFractionDigits: 0, maximumFractionDigits: 0
-    })}
+                    ${formatPriceINR(product.price[selectedVariant])}
                 </p>
-
+                <select
+                    name="quantity-selector"
+                    id="product-qty"
+                    class="font-bold text-center w-14 py-1 px-2 mb-1 bg-primary text-white rounded-lg shadow-2xl js-product-quantity-dropdown-${product.id}"
+                    >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
                 <button class="js-add-to-cart max-sm:self-center rounded-lg max-w-40 bg-primary py-1.5 px-5 text-sm font-bold text-white duration-100 ease-in-out border-2 border-primary hover:border-secondary hover:text-secondary">
                     Add to cart
                 </button>
