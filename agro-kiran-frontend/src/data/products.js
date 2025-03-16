@@ -2,6 +2,7 @@ import flower from "../assets/flower-primary-stroke.png"
 import productbg from "../assets/Product-bg.png"
 import { listenerForAddToCart } from "./cart.js";
 import { formatPriceINR } from "../utils/utils.js";
+import { deliveryOptions } from "./delivery.js";
 
 const bgURL = new URL(productbg, import.meta.url).href;
 
@@ -576,4 +577,26 @@ export function renderSingleProduct() {
     listenerForAddToCart();
 }
 
+export function fetchProductData(productId, property) {
+    const product = products.find(p => p.id === productId);
+    return product ? product[property] : undefined;
+}
+
+export function fetchPaymentData(productId, deliveryOptionId, priceProperty, variant, deliveryProperty) {
+    let tempCost = 0, tempDeliveryCost = 0;
+
+    // Find the product
+    const product = products.find(p => p.id === productId);
+    if (product) {
+        tempCost = product[priceProperty]?.[variant] || 0; // Access price[variant]
+    }
+
+    // Find the delivery option
+    const deliveryOption = deliveryOptions.find(d => d.deliveryOptionId === deliveryOptionId);
+    if (deliveryOption) {
+        tempDeliveryCost = deliveryOption[deliveryProperty] || 0;
+    }
+
+    return { tempCost, tempDeliveryCost };
+}
 

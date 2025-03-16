@@ -65,7 +65,7 @@ function addToCart(productId, variant = "20kg") {
         existingItem.quantity += quantity;
     } else {
         cart.push({
-            id: productId,
+            productId,
             variant,
             quantity,
             deliveryOptionId: '1'
@@ -73,7 +73,14 @@ function addToCart(productId, variant = "20kg") {
     }
     saveCart();
     renderHeader();
-    console.log(cart);
+}
+//Calculate quantity of items in the cart
+export function calculateCartQuantity() {
+    let cartQty = 0;
+    cart.forEach(cartItem => {
+        cartQty += cartItem.quantity;
+    });
+    return cartQty;
 }
 
 export function listenerForAddToCart() {
@@ -83,8 +90,6 @@ export function listenerForAddToCart() {
                 this.closest(".js-product-card") ||
                 document.querySelector(".js-single-product-container");
             const productId = productCard.getAttribute("data-id");
-            console.log(productId);
-
             let variant = "20kg"; // Default variant
 
             // Check if user selected a different variant (only on product page)
@@ -96,4 +101,49 @@ export function listenerForAddToCart() {
             addToCart(productId, variant);
         });
     });
+}
+export function updateCartQuantity(productId, value) {
+    let cartItem = cart.find((cartItem) => cartItem.productId === productId);
+    cartItem.quantity = value;
+    saveCart();
+}
+
+//Update delivery option id in the cart
+export function updateDeliveryOption(productId, deliveryOptionId) {
+    let cartItem = cart.find((cartItem) => cartItem.productId === productId);
+    cartItem.deliveryOptionId = deliveryOptionId;
+
+    //Export Cart To local storage
+    saveCart();
+}
+
+//Delete Products from cart
+export function deleteFromCart(i) {
+    //Remvove item from cart
+    cart.splice(i, 1);
+
+    //Export cart to localStorage
+    saveCart();
+
+    //Remove cart item from checkout page
+    const cartItems = document.querySelectorAll('.js-cart-item');
+    cartItems.forEach((item, index) => {
+        if (index === i) {
+            item.remove();
+        }
+    })
+
+    //Added this check so if cart becomes empty after deletion then the view products dialog is rendered
+    const itemsContainer = document.querySelector('.js-cart-items-grid');
+    let cartHTML = '';
+
+    if (cart.length === 0) {
+        cartHTML = `<div class="empty-cart-container">
+                    <p class="mb-3 font-medium text-secondary shadow-2xl">Your Cart is empty</p>
+                    <a href="/shop.html" class="shadow-2xl py-1.5 px-2.5 bg-primary font-bold text-white duration-150 ease-in-out hover:text-secondary border-3 border-accent hover:border-secondary rounded-lg"> 
+                    View Products </a>
+                </div>`
+        itemsContainer.innerHTML = cartHTML;
+    }
+    renderHeader();
 }
