@@ -1,5 +1,5 @@
-import { renderHeader } from "../components/header";
-import { products } from "./products";
+import { renderHeader } from "../components/header.js";
+import { productService } from '../services/productService.js';
 
 export const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -51,10 +51,12 @@ function showToast(productName) {
     addedMessageTimeouts[productName] = timeoutId;
 }
 
-function addToCart(productId, variant = "20kg") {
+async function addToCart(productId, variant = "20kg") {
+    const products = await productService.fetchProducts();
     const product = products.find((p) => p.id === productId);
     if (!product) return;
-    showToast(product.title); // Show toast notification
+    
+    showToast(product.title);
 
     const productQuantityDropdown = document.querySelector(`.js-product-quantity-dropdown-${productId}`);
     const quantity = Number(productQuantityDropdown.value);

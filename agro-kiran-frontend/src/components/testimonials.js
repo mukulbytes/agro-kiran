@@ -37,7 +37,7 @@ const testimonials = [
     },
     {
         rating: 4.7,
-        testimonial: "The AI chatbot is really helpful. It suggested the best fertilizer for my crops, and I’ve seen a visible improvement in plant health.",
+        testimonial: "The AI chatbot is really helpful. It suggested the best fertilizer for my crops, and I've seen a visible improvement in plant health.",
         img: atul,
         name: "Atul Yadav",
         designation: "Wheat Farmer"

@@ -8,7 +8,7 @@ import { updatePaymentSummary } from "./paymentSummary.js";
 
 const bgURL = new URL(productbg, import.meta.url).href;
 
-export function updateCartSummary() {
+export async function updateCartSummary() {
     const itemsContainer = document.querySelector('.js-cart-items-grid');
     let cartHTML = '';
 
@@ -20,37 +20,43 @@ export function updateCartSummary() {
                 </div>`
     }
     else {
-        cart.forEach((cartItem) => {
+        // Use Promise.all to wait for all product data to be fetched
+        const cartItemsPromises = cart.map(async (cartItem) => {
             let { productId, deliveryOptionId } = cartItem;
             let deliveryDate = calculateDeliveryDate(deliveryOptionId);
 
-            cartHTML += `
-                    <div class="js-cart-item flex flex-col justify-center items-center relative p-5 border-3 border-secondary/50 rounded-lg overflow-clip">
-                        <img src="${flower}" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
-                        
-                        <!--Delivery Date Heading Div-->
-                        <div
-                            class="js-main-date-heading text-secondary font-bold text-center text-xl lg:text-left md:text-3xl mb-5"
-                            data-product-id="${productId}"
-                            data-delivery-option-id="${deliveryOptionId}"
-                        >
-                            Delivery date: <span class="block md:inline"> ${deliveryDate} </span>
+            // Await the product data
+            const productTitle = await fetchProductData(productId, "title");
+            const productPrice = await fetchProductData(productId, "price");
+            const productImages = await fetchProductData(productId, "img");
+
+            return `
+                <div class="js-cart-item flex flex-col justify-center items-center relative p-5 border-3 border-secondary/50 rounded-lg overflow-clip">
+                    <img src="${flower}" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
+                    
+                    <!--Delivery Date Heading Div-->
+                    <div
+                        class="js-main-date-heading text-secondary font-bold text-center text-xl lg:text-left md:text-3xl mb-5"
+                        data-product-id="${productId}"
+                        data-delivery-option-id="${deliveryOptionId}"
+                    >
+                        Delivery date: <span class="block md:inline"> ${deliveryDate} </span>
+                    </div>
+
+                    <!--Item Details Grid-->
+                    <div class="grid grid-cols-1 gap-5 justify-center items-center w-full">
+
+                        <!--Product Image Div-->
+                        <div class="flex items-center justify-center bg-center bg-no-repeat bg-contain" style="background-image: url('${bgURL}') !important">
+                            <img class="h-60" src="${productImages[cartItem.variant]}" alt="" />
                         </div>
 
-                        <!--Item Details Grid-->
-                        <div class="grid grid-cols-1 gap-5 justify-center items-center w-full">
+                        <div class="flex flex-col sm:flex-row max-sm:justify-between sm:justify-around  pt-5"> 
 
-                                <!--Product Image Div-->
-                            <div class="flex items-center justify-center bg-center bg-no-repeat bg-contain" style="background-image: url('${bgURL}') !important">
-                                <img class="h-60" src="${fetchProductData(productId, 'img')[cartItem.variant]}" alt="" />
-                            </div>
-
-                            <div class="flex flex-col sm:flex-row max-sm:justify-between sm:justify-around  pt-5"> 
-
-                                 <!--Product Details Div-->
-                                <div class="flex flex-col text-white font-bold gap-1.5">
-                                <div class="text-center sm:text-left text-xl md:text-2xl ">${fetchProductData(productId, "title")} (${cartItem.variant})</div>
-                                <div class="text-amber-200 text-xl md:text-2xl">${formatPriceINR(fetchProductData(productId, "price")[cartItem.variant])}</div>
+                            <!--Product Details Div-->
+                            <div class="flex flex-col text-white font-bold gap-1.5">
+                                <div class="text-center sm:text-left text-xl md:text-2xl ">${productTitle} (${cartItem.variant})</div>
+                                <div class="text-amber-200 text-xl md:text-2xl">${formatPriceINR(productPrice[cartItem.variant])}</div>
                                 <div class="flex gap-2.5 items-center text-sm md:max-md:text-lg xl:text-lg">
                                     <div class="js-quantity-display whitespace-nowrap">Quantity: ${cartItem.quantity}</div>
                                     <input class="js-quantity-input border-2 p-0.5 border-amber-200 max-w-9.5 rounded-lg text-center hidden" type="number" name="quantity" id="quantity" value="1" />
@@ -58,19 +64,23 @@ export function updateCartSummary() {
                                     <button class="text-amber-200 hover:underline hover:text-secondary js-update-button">Update</button>
                                     <button class="text-amber-200 hover:underline hover:text-secondary js-delete-button" data-product-id="${productId}">Delete</button>
                                 </div>
-                                </div>
-                            
+                            </div>
 
-                                <div>
+                            <div>
                                 <div class="text-secondary font-bold max-sm:mt-5 text-sm md:text-lg">Choose a delivery option:</div>
                                 ${generateDeliveyOptions(productId, cartItem)}
-                                </div>
                             </div>
                         </div>
                     </div>
-      `
-        })
+                </div>
+            `;
+        });
+
+        // Wait for all cart items to be processed
+        const cartItemsHTML = await Promise.all(cartItemsPromises);
+        cartHTML = cartItemsHTML.join('');
     }
+
     itemsContainer.innerHTML = cartHTML;
 
     const updateButtons = document.querySelectorAll('.js-update-button');

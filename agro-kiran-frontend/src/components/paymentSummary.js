@@ -1,21 +1,25 @@
 import { cart, calculateCartQuantity } from "../data/cart.js";
 import { formatPriceINR } from "../utils/utils.js";
-import { fetchPaymentData } from "../data/products.js";
+import { productService } from "../services/productService.js";
+import { deliveryOptions } from "../data/delivery.js";
 
-export function updatePaymentSummary() {
-
+export async function updatePaymentSummary() {
   const orderSummaryContainer = document.querySelector('.js-order-summary');
+  const products = await productService.fetchProducts();
 
   //Payment Summary Variables and Calculation
   let itemsCost = 0, deliveryCost = 0, totalBeforeTax = 0, tax = 0, orderTotal = 0;
 
-  cart.forEach(cartItem => {
-    let { productId, deliveryOptionId } = cartItem;
-    let { tempCost, tempDeliveryCost } = fetchPaymentData(productId, deliveryOptionId, 'price', cartItem.variant, 'cost');
+  for (const cartItem of cart) {
+    const { productId, deliveryOptionId } = cartItem;
+    const product = products.find(p => p.id === productId);
+    if (!product) continue;
 
-    itemsCost += cartItem.quantity * tempCost;
-    deliveryCost += tempDeliveryCost;
-  });
+    const deliveryOption = deliveryOptions.find(d => d.deliveryOptionId === deliveryOptionId);
+    
+    itemsCost += cartItem.quantity * product.price[cartItem.variant];
+    deliveryCost += deliveryOption ? deliveryOption.cost : 0;
+  }
 
   orderTotal = itemsCost + deliveryCost;
 

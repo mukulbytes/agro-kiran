@@ -34,3 +34,9 @@ button {
 .toast i {
   @apply text-accent;
 }
+.user-form-inputs {
+  @apply w-full text-primary px-3 py-2 border-2 rounded-lg border-primary placeholder:text-primary/50 focus:outline-secondary focus:outline-2;
+}
+.user-form-labels {
+  @apply block text-primary font-bold;
+}

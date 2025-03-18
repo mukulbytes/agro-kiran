@@ -3,14 +3,25 @@ import { cart } from '../data/cart';
 
 export let loggedIn = false;
 
-export function toggleUserActions(loggedIn) {
+export function toggleUserActions() {
   const loginSignup = document.querySelector('.js-ls-btns');
   const userMenu = document.querySelector('.js-user-menu');
-  if (loggedIn) {
+  const token = localStorage.getItem('token');
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (token && user) {
     userMenu.classList.remove('hidden');
     userMenu.classList.add('flex');
     loginSignup.classList.remove('flex');
     loginSignup.classList.add('hidden');
+    
+    // Add profile link
+    userMenu.href = '/profile.html';
+  } else {
+    userMenu.classList.remove('flex');
+    userMenu.classList.add('hidden');
+    loginSignup.classList.remove('hidden');
+    loginSignup.classList.add('flex');
   }
 }
 
@@ -71,8 +82,8 @@ export function renderHeader() {
           <div class="hidden md:flex gap-2 items-center justify-center">
             <!-- Buttons -->
             <div class="js-ls-btns flex gap-2">
-              <a href="" class="user-actions bg-white text-primary hover:bg-transparent">Login</a>
-              <a href="" class="user-actions text-white">Sign Up</a>
+              <a href="/login.html" class="user-actions bg-white text-primary hover:bg-transparent">Login</a>
+              <a href="/signup.html" class="user-actions text-white">Sign Up</a>
             </div>
             <!-- User Menu -->
             <a class="js-user-menu relative hidden justify-center items-center border-2 border-white rounded-full size-[28px]" href="">
@@ -132,8 +143,8 @@ export function renderHeader() {
             </a>
             <!-- Buttons -->
             <div class="js-ls-btns flex gap-2">
-              <a href="" class="user-actions bg-white text-primary hover:bg-transparent">Login</a>
-              <a href="" class="user-actions text-white">Sign Up</a>
+              <a href="/login.html" class="user-actions bg-white text-primary hover:bg-transparent">Login</a>
+              <a href="/signup.html" class="user-actions text-white">Sign Up</a>
             </div>
 
             <!-- User Menu -->
@@ -152,4 +163,7 @@ export function renderHeader() {
   let black = document.getElementById("black");
   icon.addEventListener('click', navToggle);
   black.addEventListener('click', navToggle);
+
+  // Call toggleUserActions after rendering
+  toggleUserActions();
 }

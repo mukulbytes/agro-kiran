@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Standard Node.js gitignore configuration
+# Excludes node_modules, build files, and IDE-specific files
