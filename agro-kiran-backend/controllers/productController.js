@@ -75,8 +75,6 @@ export const getProduct = catchAsync(async (req, res) => {
   });
 });
 
-
-
 // Create new product
 export const createProduct = catchAsync(async (req, res) => {
   const product = await Product.create(req.body);
@@ -89,4 +87,4 @@ export const createProduct = catchAsync(async (req, res) => {
     status: 'success',
     data: product
   });
-}); 
+});

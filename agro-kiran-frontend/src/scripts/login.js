@@ -1,6 +1,7 @@
 import { renderHeader } from "../components/header.js";
 import { renderFooter } from "../components/footer.js";
 import { API_CONFIG } from "../config/api.js";
+import { showToast } from "../utils/toast.js";
 
 class LoginHandler {
     constructor(formId) {
@@ -44,27 +45,16 @@ class LoginHandler {
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
 
-            // Show success message with animation
-            const successDiv = document.createElement('div');
-            successDiv.className = 'text-green-500 font-bold text-sm mt-4 text-center opacity-0 transition-opacity duration-300';
-            successDiv.textContent = 'Login successful! Redirecting...';
-            this.form.appendChild(successDiv);
-
-            // Fade in success message
-            requestAnimationFrame(() => {
-                successDiv.classList.remove('opacity-0');
-            });
-
-            // Redirect after animation
+            // Show success toast and redirect
+            showToast('Login successful! Redirecting...', 'success');
+            
+            // Redirect after toast animation
             setTimeout(() => {
                 window.location.href = '/profile.html';
             }, 1500);
 
         } catch (error) {
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'text-red-500 font-bold text-sm mt-4 text-center';
-            errorDiv.textContent = error.message || 'An error occurred during login';
-            this.form.appendChild(errorDiv);
+            showToast(error.message || 'An error occurred during login', 'error');
             
             submitButton.disabled = false;
             submitButton.textContent = originalText;

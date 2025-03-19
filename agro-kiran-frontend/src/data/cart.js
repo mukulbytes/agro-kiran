@@ -1,54 +1,11 @@
 import { renderHeader } from "../components/header.js";
 import { productService } from '../services/productService.js';
+import { showToast } from '../utils/toast.js';
 
 export const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function saveCart() {
     localStorage.setItem("cart", JSON.stringify(cart));
-}
-// localStorage.clear();
-
-// Toast timeout tracker
-const addedMessageTimeouts = {};
-
-function showToast(productName) {
-    let toastContainer = document.getElementById("toast-container");
-
-    // Create toast container if it doesn't exist
-    if (!toastContainer) {
-        toastContainer = document.createElement("div");
-        toastContainer.id = "toast-container";
-        toastContainer.className = "fixed top-5 right-5 flex flex-col gap-2 z-50";
-        document.body.appendChild(toastContainer);
-    }
-
-    // Create toast element
-    const toast = document.createElement("div");
-    toast.className =
-        "toast flex items-center gap-3 px-4 py-2 rounded-lg shadow-lg bg-primary text-secondary opacity-0 translate-x-5 transition-all duration-300 ease-in-out";
-    toast.innerHTML = `
-        <i class="fa-solid fa-circle-check text-accent"></i>
-        <p>${productName} added to cart</p>
-    `;
-
-    // Append toast to the container
-    toastContainer.appendChild(toast);
-
-    // Force reflow and trigger fade-in effect
-    requestAnimationFrame(() => {
-        toast.classList.remove("opacity-0", "translate-x-5");
-        toast.classList.add("opacity-100", "translate-x-0");
-    });
-
-    // Hide and remove toast after 2 seconds
-    const timeoutId = setTimeout(() => {
-        toast.classList.remove("opacity-100");
-        toast.classList.add("opacity-0");
-
-        setTimeout(() => toast.remove(), 300); // Remove after fade-out transition
-    }, 2000);
-
-    addedMessageTimeouts[productName] = timeoutId;
 }
 
 async function addToCart(productId, variant = "20kg") {
@@ -56,7 +13,7 @@ async function addToCart(productId, variant = "20kg") {
     const product = products.find((p) => p.id === productId);
     if (!product) return;
     
-    showToast(product.title);
+    showToast(`${product.title} added to cart`);
 
     const productQuantityDropdown = document.querySelector(`.js-product-quantity-dropdown-${productId}`);
     const quantity = Number(productQuantityDropdown.value);
@@ -76,6 +33,7 @@ async function addToCart(productId, variant = "20kg") {
     saveCart();
     renderHeader();
 }
+
 //Calculate quantity of items in the cart
 export function calculateCartQuantity() {
     let cartQty = 0;
@@ -104,30 +62,23 @@ export function listenerForAddToCart() {
         });
     });
 }
+
 export function updateCartQuantity(productId, value) {
     let cartItem = cart.find((cartItem) => cartItem.productId === productId);
     cartItem.quantity = value;
     saveCart();
 }
 
-//Update delivery option id in the cart
 export function updateDeliveryOption(productId, deliveryOptionId) {
     let cartItem = cart.find((cartItem) => cartItem.productId === productId);
     cartItem.deliveryOptionId = deliveryOptionId;
-
-    //Export Cart To local storage
     saveCart();
 }
 
-//Delete Products from cart
 export function deleteFromCart(i) {
-    //Remvove item from cart
     cart.splice(i, 1);
-
-    //Export cart to localStorage
     saveCart();
 
-    //Remove cart item from checkout page
     const cartItems = document.querySelectorAll('.js-cart-item');
     cartItems.forEach((item, index) => {
         if (index === i) {
@@ -135,7 +86,6 @@ export function deleteFromCart(i) {
         }
     })
 
-    //Added this check so if cart becomes empty after deletion then the view products dialog is rendered
     const itemsContainer = document.querySelector('.js-cart-items-grid');
     let cartHTML = '';
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { API_CONFIG } from '../config/api';
+import { API_CONFIG } from '../config/api.js';
 
 const CACHE_KEYS = {
   PRODUCTS: 'cached_products',
@@ -10,70 +10,24 @@ const CACHE_KEYS = {
 class ProductService {
   constructor() {
     this.api = axios.create({
-      baseURL: API_CONFIG.BASE_URL
+      baseURL: API_CONFIG.BASE_URL,
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
+    this.memoryCache = null;
   }
 
   async getLastUpdated() {
-    const response = await this.api.get('/products/timestamp');
-    return response.data.timestamp;
-  }
-
-  async getCachedProducts() {
-    const cachedData = localStorage.getItem(CACHE_KEYS.PRODUCTS);
-    const cachedTimestamp = localStorage.getItem(CACHE_KEYS.TIMESTAMP);
-
-    if (!cachedData || !cachedTimestamp) {
-      return null;
-    }
-
     try {
-      // Check if cache is still valid
-      const serverTimestamp = await this.getLastUpdated();
-      if (dayjs(Number(cachedTimestamp)).isBefore(dayjs(serverTimestamp))) {
-        return null;
-      }
-      return JSON.parse(cachedData);
+      const response = await this.api.get('/products/timestamp');
+      return response.data.timestamp;
     } catch (error) {
-      console.error('Error checking cache validity:', error);
-      return null;
-    }
-  }
-
-  async fetchProducts() {
-    try {
-      // Try to get from cache first
-      const cachedProducts = await this.getCachedProducts();
-      if (cachedProducts) {
-        // Validate cached data structure
-        if (this.validateProductData(cachedProducts)) {
-          return cachedProducts;
-        }
-        // If validation fails, clear invalid cache
-        localStorage.removeItem(CACHE_KEYS.PRODUCTS);
-        localStorage.removeItem(CACHE_KEYS.TIMESTAMP);
-      }
-
-      // If not in cache or invalid, fetch from API
-      const response = await this.api.get('/products');
-      const products = response.data.data;
-
-      // Validate API response data before caching
-      if (this.validateProductData(products)) {
-        // Update cache
-        localStorage.setItem(CACHE_KEYS.PRODUCTS, JSON.stringify(products));
-        localStorage.setItem(CACHE_KEYS.TIMESTAMP, dayjs().valueOf().toString());
-
-        return products;
-      }
-      throw new Error('Invalid product data structure received from API');
-    } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error('Error getting last updated timestamp:', error);
       throw error;
     }
   }
 
-  // Validate product data structure
   validateProductData(products) {
     if (!Array.isArray(products)) return false;
 
@@ -98,6 +52,94 @@ class ProductService {
       );
     });
   }
+
+  async getCachedProducts() {
+    // First check memory cache
+    if (this.memoryCache) {
+      return this.memoryCache;
+    }
+
+    // Then check localStorage
+    const cachedData = localStorage.getItem(CACHE_KEYS.PRODUCTS);
+    const cachedTimestamp = localStorage.getItem(CACHE_KEYS.TIMESTAMP);
+
+    if (!cachedData || !cachedTimestamp) {
+      return null;
+    }
+
+    try {
+      // Check if cache is still valid
+      const serverTimestamp = await this.getLastUpdated();
+      if (dayjs(Number(cachedTimestamp)).isBefore(dayjs(serverTimestamp))) {
+        return null;
+      }
+
+      const parsedData = JSON.parse(cachedData);
+      if (this.validateProductData(parsedData)) {
+        this.memoryCache = parsedData; // Update memory cache
+        return parsedData;
+      }
+
+      // If validation fails, clear invalid cache
+      this.clearCache();
+      return null;
+    } catch (error) {
+      console.error('Error checking cache validity:', error);
+      return null;
+    }
+  }
+
+  async fetchProducts() {
+    try {
+      // Try to get from cache first
+      const cachedProducts = await this.getCachedProducts();
+      if (cachedProducts) {
+        return cachedProducts;
+      }
+
+      // If not in cache or invalid, fetch from API
+      const response = await this.api.get(API_CONFIG.ENDPOINTS.PRODUCTS);
+
+      if (response.data.status !== 'success') {
+        throw new Error(response.data.message || 'Failed to fetch products');
+      }
+
+      const products = response.data.data;
+
+      // Validate API response data before caching
+      if (this.validateProductData(products)) {
+        // Update both memory and localStorage cache
+        this.memoryCache = products;
+        localStorage.setItem(CACHE_KEYS.PRODUCTS, JSON.stringify(products));
+        localStorage.setItem(CACHE_KEYS.TIMESTAMP, Date.now().toString());
+        return products;
+      }
+
+      throw new Error('Invalid product data structure received from API');
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error('Server responded with error:', error.response.data);
+        throw new Error(error.response.data.message || 'Server error');
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('No response received:', error.request);
+        throw new Error('No response from server. Please check your internet connection.');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error setting up request:', error.message);
+        throw error;
+      }
+    }
+  }
+
+  clearCache() {
+    this.memoryCache = null;
+    localStorage.removeItem(CACHE_KEYS.PRODUCTS);
+    localStorage.removeItem(CACHE_KEYS.TIMESTAMP);
+  }
 }
 
-export const productService = new ProductService(); 
+export const productService = new ProductService();

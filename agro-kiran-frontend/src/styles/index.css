@@ -40,3 +40,6 @@ button {
 .user-form-labels {
   @apply block text-primary font-bold;
 }
+.shop-inputs {
+  @apply min-w-15 px-4 py-2 bg-accent text-amber-200 focus:outline-none focus:ring-2 focus:ring-secondary cursor-pointer;
+}

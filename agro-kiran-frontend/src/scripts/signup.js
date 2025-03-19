@@ -1,6 +1,7 @@
 import { renderFooter } from "../components/footer.js";
 import { renderHeader } from "../components/header.js";
 import { API_CONFIG } from "../config/api.js";
+import { showToast } from "../utils/toast.js";
 
 // Validation configurations
 const VALIDATION_RULES = {
@@ -157,42 +158,20 @@ class SignupValidator {
             // Store token
             localStorage.setItem('token', data.token);
 
-            // Show success message with animation
-            const successDiv = document.createElement('div');
-            successDiv.className = 'text-green-500 font-bold text-sm mt-4 text-center opacity-0 transition-opacity duration-300';
-            successDiv.textContent = 'Registration successful! Redirecting...';
-            this.form.appendChild(successDiv);
+            // Show success toast and redirect
+            showToast('Registration successful! Redirecting...', 'success');
 
-            // Fade in success message
-            requestAnimationFrame(() => {
-                successDiv.classList.remove('opacity-0');
-            });
-
-            // Redirect after animation
+            // Redirect after toast animation
             setTimeout(() => {
                 window.location.href = '/index.html';
             }, 1500);
 
         } catch (error) {
-            const errorDiv = document.createElement('div');
-            this.showError(errorDiv, error.message || 'An error occurred during signup');
+            showToast(error.message || 'An error occurred during signup', 'error');
             
             submitButton.disabled = false;
             submitButton.textContent = originalText;
         }
-    }
-
-    showSuccessMessage(message) {
-        const successDiv = document.createElement('div');
-        successDiv.className = 'text-green-500 font-bold text-sm mt-4 text-center';
-        successDiv.textContent = message;
-        this.form.appendChild(successDiv);
-    }
-
-    showError(element, message) {
-        element.className = 'text-red-500 font-bold text-sm mt-4 text-center';
-        element.textContent = message;
-        this.form.appendChild(element);
     }
 }
 

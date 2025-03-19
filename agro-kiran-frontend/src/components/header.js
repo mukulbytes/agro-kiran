@@ -48,7 +48,7 @@ export function renderHeader() {
       <div class="h-20 bg-primary"></div>
 
       <!-- Header Navigation -->
-      <header class="fixed top-0 right-0 left-0 z-10 w-full py-[15px] px-[35px] text-[1.05rem] bg-primary h-20 shadow-2xl">
+      <header class="fixed top-0 right-0 left-0 z-50 w-full py-[15px] px-[35px] text-[1.05rem] bg-primary h-20 shadow-2xl">
         <nav class="flex justify-between items-center">
           <!-- Logo -->
           <a class="" href="/index.html">
@@ -106,7 +106,7 @@ export function renderHeader() {
 
       <!-- Hamburger Navigation -->
       <aside
-        class="md:hidden fixed z-[15] top-0 right-0 h-screen w-0 opacity-0 duration-500 delay-100 ease-[--cubic-bez] bg-primary text-white"
+        class="md:hidden fixed z-50 top-0 right-0 h-screen w-0 opacity-0 duration-500 delay-100 ease-[--cubic-bez] bg-primary text-white"
         id="nav"
       >
         <nav class="flex flex-col">
@@ -156,7 +156,7 @@ export function renderHeader() {
       </aside>
 
       <!-- Hamburger Black Alpha BG -->
-      <div class="fixed top-0 left-0 bg-black/50 h-screen w-0 duration-500 delay-75 ease-[--cubic-bez] z-[14] opacity-0 md:hidden" id="black"></div>
+      <div class="fixed top-0 left-0 bg-black/50 h-screen w-0 duration-500 delay-75 ease-[--cubic-bez] z-50 opacity-0 md:hidden" id="black"></div>
     `;
   headerElement.innerHTML = headerContentHTML;
   let icon = document.getElementById("icon");
