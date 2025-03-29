@@ -1,14 +1,16 @@
 import flower from "../assets/flower-primary-stroke.png"
 import productbg from "../assets/Product-bg.png"
 import { fetchProductData } from "../data/products.js";
-import { cart, updateCartQuantity, updateDeliveryOption, deleteFromCart } from "../data/cart.js";
+import { updateCartQuantity, updateDeliveryOption, deleteFromCart } from "../data/cart.js";
 import { formatPriceINR } from "../utils/utils.js";
 import { calculateDeliveryDate, renderDeliveryDate, generateDeliveyOptions } from "../data/delivery.js";
 import { updatePaymentSummary } from "./paymentSummary.js";
+import { userService } from "../services/userService.js";
 
 const bgURL = new URL(productbg, import.meta.url).href;
 
 export async function updateCartSummary() {
+    const cart = await userService.getCart();
     const itemsContainer = document.querySelector('.js-cart-items-grid');
     let cartHTML = '';
 
@@ -90,7 +92,8 @@ export async function updateCartSummary() {
 
     //Refactor duplicate code
 
-    function handleUpdate(index) {
+    async function handleUpdate(index) {
+        const cart = await userService.getCart();
         //fecth the current button
         let btn = saveButtons[index];
         let { productId } = btn.dataset;

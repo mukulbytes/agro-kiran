@@ -11,15 +11,92 @@
     <div class="js-header-content"></div>
 
     <main class="container mx-auto p-8">
-      <div class="bg-amber-100 rounded-xl p-8 shadow-2xl max-w-2xl mx-auto">
-        <h1 class="text-3xl font-bold text-primary mb-6">My Profile</h1>
-
-        <div id="profile-content" class="space-y-4">
-          <div class="animate-pulse bg-gray-200 h-6 rounded w-1/2"></div>
-          <div class="animate-pulse bg-gray-200 h-6 rounded w-3/4"></div>
+      <div class="bg-accent rounded-xl p-8 shadow-2xl max-w-6xl mx-auto">
+        <div class="flex justify-between items-start">
+          <h2 class="z-2 text-white mb-5 text-3xl text-center font-bold underline underline-offset-7 decoration-secondary decoration-5 font-sans">
+            My Profile
+          </h2>
         </div>
 
-        <button id="logout-btn" class="mt-8 bg-primary text-white px-6 py-2 rounded-lg hover:bg-accent transition-colors">Logout</button>
+        <!-- Tabs -->
+        <div class="border-b border-primary mb-8">
+          <div class="flex space-x-8 text-white">
+            <button
+              class="tab-btn active py-2 px-4 font-semibold border-b-3 border-transparent hover:border-secondary transition-colors"
+              data-tab="profile"
+            >
+              Profile Settings
+            </button>
+            <button class="tab-btn py-2 px-4 font-semibold border-b-3 border-transparent hover:border-secondary transition-colors" data-tab="addresses">
+              Addresses
+            </button>
+            <button class="tab-btn py-2 px-4 font-semibold border-b-3 border-transparent hover:border-secondary transition-colors" data-tab="orders">
+              Orders
+            </button>
+          </div>
+        </div>
+
+        <!-- Profile Settings Tab -->
+        <div id="profile-tab" class="tab-content grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form id="password-form" class="space-y-6 h-fit bg-primary p-6 rounded-lg mt-6 border-2 border-secondary shadow-2xl relative overflow-clip">
+            <img src="assets/hero-Animated.png" alt="" class="absolute size-50 -top-28 -right-20 rounded-full mx-auto pointer-events-none blur-xs">
+            <h2 class="text-xl font-semibold text-white underline underline-offset-7 decoration-accent decoration-2">Change Password</h2>
+            <div class="flex flex-col gap-1">
+              <label class="profile-labels">Current Password</label>
+              <input type="password" name="current-password" required class="profile-inputs" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="profile-labels">New Password</label>
+              <input type="password" name="new-password" required class="profile-inputs" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="profile-labels">Confirm New Password</label>
+              <input type="password" name="confirm-password" required class="profile-inputs" />
+            </div>
+            <button type="submit" class="button-primary bg-accent px-5 py-1.5 rounded-lg">Change Password</button>
+          </form>
+
+          <form id="profile-form" class="space-y-6 h-fit bg-primary p-6 rounded-lg mt-6 border-2 border-secondary shadow-2xl relative overflow-clip">
+            <img src="assets/hero-Animated.png" alt="" class="absolute size-50 -top-28 -right-20 rounded-full mx-auto pointer-events-none blur-xs">
+            <h2 class="text-xl font-semibold text-white underline underline-offset-7 decoration-accent decoration-2">Profile Settings</h2>
+            <div class="flex flex-col gap-1">
+              <label class="profile-labels">Name</label>
+              <input type="text" name="name" id="name" required class="profile-inputs" />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="profile-labels">Email</label>
+              <input type="email" name="email" id="email" required class="profile-inputs" />
+            </div>
+            <!-- <button type="submit" class="button-primary bg-accent px-5 py-1.5 rounded-lg">Update Profile</button> -->
+          </form>
+
+          <div class="space-y-6 max-w-2xl bg-primary p-6 rounded-lg mt-6 border-2 border-secondary shadow-2xl relative overflow-clip">
+            <img src="assets/hero-Animated.png" alt="" class="absolute size-50 -top-28 -right-20 rounded-full mx-auto pointer-events-none blur-xs">
+            <h2 class="text-xl font-semibold text-white underline underline-offset-7 decoration-accent decoration-2">Account Actions</h2>
+            <div class="flex flex-col gap-4">
+              <div class="flex gap-4">
+                <button id="deactivate-account" class="text-white font-medium bg-amber-600 hover:bg-amber-700 px-5 py-1.5 rounded-lg">Deactivate Account</button>
+                <button id="delete-account" class="text-white font-medium bg-red-600 hover:bg-red-700 px-5 py-1.5 rounded-lg">Delete Account</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Addresses Tab -->
+        <div id="addresses-tab" class="tab-content hidden">
+          <div class="js-addresses-grid grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Addresses will be populated here -->
+          </div>
+          <button id="add-address-btn" class="w-fit bg-primary text-white px-6 mt-5 py-2 rounded-lg hover:bg-accent transition-colors">Add New Address</button>
+          <div id="js-address-form" class="hidden"></div>
+        </div>
+
+        <!-- Orders Tab -->
+        <div id="orders-tab" class="tab-content hidden">
+          <div class="js-orders-grid space-y-4">
+            <!-- Orders will be populated here -->
+          </div>
+        </div>
       </div>
     </main>
 

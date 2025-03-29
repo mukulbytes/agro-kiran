@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Tracking - Agro Kiran</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body class="bg-primary">
+    <!-- Header -->
+    <div class="js-header-content"></div>
+
+    <main class="container mx-auto p-8">
+      <div class="bg-amber-100 rounded-xl p-8 shadow-2xl max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-primary mb-6">Track Order</h1>
+
+        <!-- Order Details -->
+        <div class="js-order-details bg-white p-6 rounded-lg mb-8">
+          <!-- Order details will be populated here -->
+        </div>
+
+        <!-- Order Status Timeline -->
+        <div class="relative">
+          <!-- Progress Bar -->
+          <div class="js-progress-bar absolute top-5 left-0 h-2 bg-secondary transition-all duration-500"></div>
+          
+          <!-- Status Steps -->
+          <div class="js-status-steps grid grid-cols-1 md:grid-cols-5 gap-4">
+            <div class="status-step" data-status="order_received">
+              <div class="flex items-center">
+                <div class="status-circle w-10 h-10 rounded-full border-4 border-gray-300 bg-white flex items-center justify-center">
+                  <i class="fas fa-box text-gray-300"></i>
+                </div>
+                <div class="ml-4">
+                  <h3 class="font-semibold text-primary">Order Received</h3>
+                  <p class="text-sm text-gray-600 js-status-time"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="status-step" data-status="packing">
+              <div class="flex items-center">
+                <div class="status-circle w-10 h-10 rounded-full border-4 border-gray-300 bg-white flex items-center justify-center">
+                  <i class="fas fa-box-open text-gray-300"></i>
+                </div>
+                <div class="ml-4">
+                  <h3 class="font-semibold text-primary">Packing</h3>
+                  <p class="text-sm text-gray-600 js-status-time"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="status-step" data-status="shipping">
+              <div class="flex items-center">
+                <div class="status-circle w-10 h-10 rounded-full border-4 border-gray-300 bg-white flex items-center justify-center">
+                  <i class="fas fa-truck text-gray-300"></i>
+                </div>
+                <div class="ml-4">
+                  <h3 class="font-semibold text-primary">Shipping</h3>
+                  <p class="text-sm text-gray-600 js-status-time"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="status-step" data-status="out_for_delivery">
+              <div class="flex items-center">
+                <div class="status-circle w-10 h-10 rounded-full border-4 border-gray-300 bg-white flex items-center justify-center">
+                  <i class="fas fa-shipping-fast text-gray-300"></i>
+                </div>
+                <div class="ml-4">
+                  <h3 class="font-semibold text-primary">Out for Delivery</h3>
+                  <p class="text-sm text-gray-600 js-status-time"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="status-step" data-status="delivered">
+              <div class="flex items-center">
+                <div class="status-circle w-10 h-10 rounded-full border-4 border-gray-300 bg-white flex items-center justify-center">
+                  <i class="fas fa-check text-gray-300"></i>
+                </div>
+                <div class="ml-4">
+                  <h3 class="font-semibold text-primary">Delivered</h3>
+                  <p class="text-sm text-gray-600 js-status-time"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Back to Orders Button -->
+        <div class="mt-8 text-center">
+          <a href="profile.html" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-accent transition-colors">
+            Back to Orders
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="js-footer p-5 bg-primary grid grid-cols-2 xs:max-md:grid-cols-3 md:grid-cols-4 gap-5 items-start w-full overflow-clip"></footer>
+    <script src="https://kit.fontawesome.com/10b097dc47.js" crossorigin="anonymous"></script>
+    <script type="module" src="scripts/order-tracking.js"></script>
+  </body>
+</html> 

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shipping - Agro Kiran</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body class="bg-primary">
+    <!-- Header -->
+    <div class="js-header-content"></div>
+
+    <main class="container mx-auto p-8">
+      <div class="bg-accent rounded-xl p-8 shadow-2xl max-w-4xl mx-auto">
+        <h1 class="z-2 text-white mb-5 text-3xl text-center font-bold underline underline-offset-7 decoration-secondary decoration-5 font-sans">
+          Shipping Address
+        </h1>
+
+        <!-- Saved Addresses (Only for logged-in users) -->
+        <div id="saved-addresses" class="mb-8 js-logged-in-only hidden">
+          <div class="js-addresses-grid grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Addresses will be populated here -->
+          </div>
+        </div>
+
+        <!-- Address Form -->
+        <div id="address-form" class="space-y-4 bg-primary p-6 rounded-lg border-2 border-secondary shadow-2xl relative overflow-clip">
+          <img src="assets/hero-Animated.png" alt="" class="absolute size-50 -top-28 -right-20 rounded-full mx-auto pointer-events-none blur-xs">
+          <h2 class="text-xl font-semibold text-white underline underline-offset-7 decoration-accent decoration-2">Shipping Address</h2>
+          <form class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="profile-labels">Full Name<span class="text-red-500">*</span></label>
+                <input type="text" name="fullName" required class="profile-inputs">
+              </div>
+              <div>
+                <label class="profile-labels">Phone Number<span class="text-red-500">*</span></label>
+                <input type="tel" name="phoneNumber" required class="profile-inputs">
+              </div>
+              <div>
+                <label class="profile-labels">Street Address<span class="text-red-500">*</span></label>
+                <input type="text" name="street" required class="profile-inputs">
+              </div>
+              <div>
+                <label class="profile-labels">City<span class="text-red-500">*</span></label>
+                <input type="text" name="city" required class="profile-inputs">
+              </div>
+              <div>
+                <label class="profile-labels">State<span class="text-red-500">*</span></label>
+                <input type="text" name="state" required class="profile-inputs">
+              </div>
+              <div>
+                <label class="profile-labels">Pincode<span class="text-red-500">*</span></label>
+                <input type="text" name="pincode" required class="profile-inputs">
+              </div>
+            </div>
+
+            <!-- Save Address Checkbox (Only for logged-in users) -->
+            <div class="js-logged-in-only hidden">
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" name="saveAddress" class="form-checkbox text-accent">
+                <span class="text-white/75">Save this address for future orders</span>
+              </label>
+            </div>
+
+            <!-- Guest Email (Only for guest users) -->
+            <div class="js-guest-only hidden">
+              <label class="profile-labels">Email<span class="text-red-500">*</span></label>
+              <input type="email" name="email" class="profile-inputs" placeholder="Required for order updates">
+            </div>
+
+            <div class="flex justify-between items-center">
+              <button type="button" id="fill-dummy-data" class="text-white/75 hover:text-secondary underline">Fill with Dummy Data</button>
+              <button type="submit" class="button-primary bg-accent px-5 py-1.5 rounded-lg">
+                Continue to Payment
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="js-footer p-5 bg-primary grid grid-cols-2 xs:max-md:grid-cols-3 md:grid-cols-4 gap-5 items-start w-full overflow-clip"></footer>
+    <script src="https://kit.fontawesome.com/10b097dc47.js" crossorigin="anonymous"></script>
+    <script type="module" src="scripts/shipping.js"></script>
+  </body>
+</html> 

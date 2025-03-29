@@ -1,4 +1,4 @@
-import Product from '../models/Product.js';
+import Product from '../models/productModel.js';
 import { catchAsync } from '../utils/catchAsync.js';
 import { cacheService } from '../config/cache.js';
 

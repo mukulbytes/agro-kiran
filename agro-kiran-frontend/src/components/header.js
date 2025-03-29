@@ -1,28 +1,13 @@
 import brandLogo from '../assets/agro-kiran-dark.png';
-import { cart } from '../data/cart';
+import { userService } from '../services/userService.js';
+import { clearAuthData, isAuthenticated } from '../utils/auth.js';
+import { showToast } from '../utils/toast.js';
 
-export let loggedIn = false;
-
-export function toggleUserActions() {
-  const loginSignup = document.querySelector('.js-ls-btns');
-  const userMenu = document.querySelector('.js-user-menu');
-  const token = localStorage.getItem('token');
-  const user = JSON.parse(localStorage.getItem('user'));
-
-  if (token && user) {
-    userMenu.classList.remove('hidden');
-    userMenu.classList.add('flex');
-    loginSignup.classList.remove('flex');
-    loginSignup.classList.add('hidden');
-    
-    // Add profile link
-    userMenu.href = '/profile.html';
-  } else {
-    userMenu.classList.remove('flex');
-    userMenu.classList.add('hidden');
-    loginSignup.classList.remove('hidden');
-    loginSignup.classList.add('flex');
-  }
+// Handle logout
+function handleLogout() {
+  clearAuthData();
+  showToast('Logged out successfully', 'success');
+  window.location.href = 'index.html';
 }
 
 function navToggle() {
@@ -39,9 +24,10 @@ function navToggle() {
   black.classList.toggle('slide');
 };
 
-export function renderHeader() {
+export async function renderHeader() {
   const currentPage = window.location.pathname;
   const headerElement = document.querySelector('.js-header-content');
+  const cart = await userService.getCart();
 
   const headerContentHTML = `
       <!-- Spacer -->
@@ -51,26 +37,26 @@ export function renderHeader() {
       <header class="fixed top-0 right-0 left-0 z-50 w-full py-[15px] px-[35px] text-[1.05rem] bg-primary h-20 shadow-2xl">
         <nav class="flex justify-between items-center">
           <!-- Logo -->
-          <a class="" href="/index.html">
+          <a class="" href="index.html">
           <img class="w-[60px] duration-170 hover:scale-105" src="${brandLogo}" alt="-brand-logo" />
           </a>
           <!-- Nav Links -->
           <ul class="hidden md:flex gap-8 text-white ml-20 flex-1 justify-center h-max">
             <li>
-              <a class="nav-links ${currentPage === '/index.html' || currentPage === '/' ? 'active-li-header' : ''}" href="/index.html">Home</a>
+              <a class="nav-links ${currentPage === '/index.html' || currentPage === '/' ? 'active-li-header' : ''}" href="index.html">Home</a>
             </li>
             <li>
-              <a class="nav-links ${currentPage === '/shop.html' ? 'active-li-header' : ''}" href="/shop.html">Shop</a>
+              <a class="nav-links ${currentPage === '/shop.html' ? 'active-li-header' : ''}" href="shop.html">Shop</a>
             </li>
             <li>
-              <a class="nav-links ${currentPage === '/about.html' ? 'active-li-header' : ''}" href="/about.html">About</a>
+              <a class="nav-links ${currentPage === '/about.html' ? 'active-li-header' : ''}" href="about.html">About</a>
             </li>
             <li>
-              <a class="nav-links ${currentPage === '/contact.html' ? 'active-li-header' : ''}" href="/contact.html">Contact</a>
+              <a class="nav-links ${currentPage === '/contact.html' ? 'active-li-header' : ''}" href="contact.html">Contact</a>
             </li>
           </ul>
           <!-- Cart Icon -->
-          <a href="/checkout.html" class="mr-4 hidden md:flex items-center">
+          <a href="checkout.html" class="mr-3 hidden md:flex items-center">
             <span class="relative size-3 ${cart.length ? "flex" : "hidden"}">
               <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75 -top-2.5 left-2.5"></span>
               <span class="relative inline-flex size-3 rounded-full bg-secondary -top-2.5 left-2.5"></span>
@@ -80,15 +66,22 @@ export function renderHeader() {
 
           <!-- Login Signup -->
           <div class="hidden md:flex gap-2 items-center justify-center">
-            <!-- Buttons -->
-            <div class="js-ls-btns flex gap-2">
-              <a href="/login.html" class="user-actions bg-white text-primary hover:bg-transparent">Login</a>
-              <a href="/signup.html" class="user-actions text-white">Sign Up</a>
+            <!-- Login/Signup Buttons -->
+            <div class="${isAuthenticated() ? 'hidden' : 'flex'} gap-2">
+              <a href="login.html" class="user-actions bg-white text-primary  hover:bg-transparent">Login</a>
+              <a href="signup.html" class="user-actions text-white">Sign Up</a>
             </div>
-            <!-- User Menu -->
-            <a class="js-user-menu relative hidden justify-center items-center border-2 border-white rounded-full size-[28px]" href="">
-              <i class="fa-solid fa-user text-white text-[12px]"></i>
-            </a>
+            <!-- Profile/Logout Buttons -->
+            <div class="relative ${isAuthenticated() ? 'flex' : 'hidden'} gap-2">
+              <a class="flex user-actions size-[28px]" href="/profile.html">
+                <i class="fa-solid fa-user text-white text-[12px]"></i>
+              </a>
+              <!-- Logout Button -->
+              <button class="js-logout-btn user-actions text-white">
+                <i class="fas fa-sign-out-alt mr-2"></i>
+                Logout
+              </button>
+            </div>
           </div>
         </nav>
       </header>
@@ -118,45 +111,54 @@ export function renderHeader() {
           <!-- Nav Links -->
           <ul class="flex flex-col gap-5 justify-center mt-2 p-3 text-[1rem] tracking-wider">
              <li>
-              <a class="nav-links ${currentPage === '/index.html' || currentPage === '/' ? 'text-secondary font-bold' : ''}" href="/index.html">Home</a>
+              <a class="nav-links ${currentPage === '/index.html' || currentPage === '/' ? 'text-secondary font-bold' : ''}" href="index.html">Home</a>
             </li>
             <li>
-              <a class="nav-links ${currentPage === '/shop.html' ? 'text-secondary font-bold' : ''}" href="/shop.html">Shop</a>
+              <a class="nav-links ${currentPage === '/shop.html' ? 'text-secondary font-bold' : ''}" href="shop.html">Shop</a>
             </li>
             <li>
-              <a class="nav-links ${currentPage === '/about.html' ? 'text-secondary font-bold' : ''}" href="/about.html">About</a>
+              <a class="nav-links ${currentPage === '/about.html' ? 'text-secondary font-bold' : ''}" href="about.html">About</a>
             </li>
             <li>
-              <a class="nav-links ${currentPage === '/contact.html' ? 'text-secondary font-bold' : ''}" href="/contact.html">Contact</a>
+              <a class="nav-links ${currentPage === '/contact.html' ? 'text-secondary font-bold' : ''}" href="contact.html">Contact</a>
             </li>
           </ul>
 
           <!-- User Action -->
-          <div class="flex gap-2 items-center border-t-2 border-t-secondary mt-5 pt-5">
+          <div class="flex gap-2 items-center justify-between border-t-2 border-t-secondary mt-5 p-2 pt-5">
             <!-- Cart -->
-            <a href="/checkout.html" class="mr-4 flex items-center">
+            <a href="checkout.html" class="flex items-center">
               <span class="relative size-3 ${cart.length ? "flex" : "hidden"}">
                 <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75 -top-2.5 left-2.5"></span>
                 <span class="relative inline-flex size-3 rounded-full bg-secondary -top-2.5 left-2.5"></span>
               </span>
               <i class="fa-solid fa-cart-shopping text-white text-[20px]"></i>
+              <span class="text-white ml-2 font-medium">Cart</span>
             </a>
             <!-- Buttons -->
-            <div class="js-ls-btns flex gap-2">
-              <a href="/login.html" class="user-actions bg-white text-primary hover:bg-transparent">Login</a>
-              <a href="/signup.html" class="user-actions text-white">Sign Up</a>
+            <div class="${isAuthenticated() ? 'hidden' : 'flex'}  gap-2">
+              <a href="login.html" class="user-actions  bg-white text-primary hover:bg-transparent">Login</a>
+              <a href="signup.html" class="user-actions text-white">Sign Up</a>
             </div>
 
-            <!-- User Menu -->
-            <a class="js-user-menu relative hidden justify-center items-center border-2 border-white rounded-full size-[28px]" href="">
-              <i class="fa-solid fa-user text-white text-[12px]"></i>
-            </a>
+            <!-- Profile/Logout Buttons-->
+            <div class="relative ${isAuthenticated() ? 'flex' : 'hidden'} gap-1">
+              <a class="flex user-actions" href="/profile.html">
+                <i class="fa-solid fa-user text-white text-[12px]"></i>
+                <span class="text-white ml-2 font-medium">Profile</span>
+              </a>
+            <!-- Logout Button -->
+            <button class="js-mobile-logout-btn flex user-actions text-white">
+              <i class="fas fa-sign-out-alt mr-2"></i>
+              Logout
+            </button>
+            </div>
           </div>
         </nav>
       </aside>
 
       <!-- Hamburger Black Alpha BG -->
-      <div class="fixed top-0 left-0 bg-black/50 h-screen w-0 duration-500 delay-75 ease-[--cubic-bez] z-50 opacity-0 md:hidden" id="black"></div>
+      <div class="fixed top-0 left-0 bg-black/50 h-screen w-0 duration-500 delay-75 ease-[--cubic-bez] z-49 opacity-0 md:hidden" id="black"></div>
     `;
   headerElement.innerHTML = headerContentHTML;
   let icon = document.getElementById("icon");
@@ -164,6 +166,13 @@ export function renderHeader() {
   icon.addEventListener('click', navToggle);
   black.addEventListener('click', navToggle);
 
-  // Call toggleUserActions after rendering
-  toggleUserActions();
+  // Add logout event listener
+  const logoutBtn = document.querySelector('.js-logout-btn');
+  const mobileLogoutBtn = document.querySelector('.js-mobile-logout-btn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', handleLogout);
+  }
+  if (mobileLogoutBtn) {
+    mobileLogoutBtn.addEventListener('click', handleLogout);
+  }
 }

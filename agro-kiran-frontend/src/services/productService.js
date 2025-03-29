@@ -54,12 +54,12 @@ class ProductService {
   }
 
   async getCachedProducts() {
-    // First check memory cache
+ 
     if (this.memoryCache) {
       return this.memoryCache;
     }
 
-    // Then check localStorage
+
     const cachedData = localStorage.getItem(CACHE_KEYS.PRODUCTS);
     const cachedTimestamp = localStorage.getItem(CACHE_KEYS.TIMESTAMP);
 
@@ -68,7 +68,7 @@ class ProductService {
     }
 
     try {
-      // Check if cache is still valid
+  
       const serverTimestamp = await this.getLastUpdated();
       if (dayjs(Number(cachedTimestamp)).isBefore(dayjs(serverTimestamp))) {
         return null;
@@ -76,11 +76,11 @@ class ProductService {
 
       const parsedData = JSON.parse(cachedData);
       if (this.validateProductData(parsedData)) {
-        this.memoryCache = parsedData; // Update memory cache
+        this.memoryCache = parsedData; 
         return parsedData;
       }
 
-      // If validation fails, clear invalid cache
+  
       this.clearCache();
       return null;
     } catch (error) {
@@ -91,13 +91,13 @@ class ProductService {
 
   async fetchProducts() {
     try {
-      // Try to get from cache first
+
       const cachedProducts = await this.getCachedProducts();
       if (cachedProducts) {
         return cachedProducts;
       }
 
-      // If not in cache or invalid, fetch from API
+
       const response = await this.api.get(API_CONFIG.ENDPOINTS.PRODUCTS);
 
       if (response.data.status !== 'success') {
@@ -106,9 +106,9 @@ class ProductService {
 
       const products = response.data.data;
 
-      // Validate API response data before caching
+
       if (this.validateProductData(products)) {
-        // Update both memory and localStorage cache
+
         this.memoryCache = products;
         localStorage.setItem(CACHE_KEYS.PRODUCTS, JSON.stringify(products));
         localStorage.setItem(CACHE_KEYS.TIMESTAMP, Date.now().toString());
@@ -119,16 +119,12 @@ class ProductService {
     } catch (error) {
       console.error('Error fetching products:', error);
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         console.error('Server responded with error:', error.response.data);
         throw new Error(error.response.data.message || 'Server error');
       } else if (error.request) {
-        // The request was made but no response was received
         console.error('No response received:', error.request);
         throw new Error('No response from server. Please check your internet connection.');
       } else {
-        // Something happened in setting up the request that triggered an Error
         console.error('Error setting up request:', error.message);
         throw error;
       }

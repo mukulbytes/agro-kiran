@@ -2,7 +2,6 @@ import { renderFooter } from "../components/footer.js";
 import { renderHeader } from "../components/header.js";
 import { renderFilteredProducts } from '../data/products.js';
 import { productService } from '../services/productService.js';
-import { showToast } from '../utils/toast.js';
 
 let products = [];
 let filteredProducts = [];
@@ -13,11 +12,11 @@ let currentFilter = '';
 document.addEventListener("DOMContentLoaded", async () => {
     renderHeader();
     renderFooter();
-    
+
     // Fetch all products
     products = await productService.fetchProducts();
     filteredProducts = [...products];
-    
+
     // Initial render
     const container = document.querySelector('.js-products-grid');
     renderFilteredProducts(container, filteredProducts);
@@ -25,11 +24,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Search input handler
     const searchInput = document.getElementById('search-input');
     const suggestionsContainer = document.getElementById('search-suggestions');
-    
+
     searchInput.addEventListener('input', (e) => {
         clearTimeout(searchTimeout);
         const query = e.target.value.toLowerCase();
-        
+
         // Show/hide suggestions container
         if (query.length > 0) {
             suggestionsContainer.classList.remove('hidden');
@@ -39,19 +38,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             renderFilteredProducts(container, filteredProducts);
             return;
         }
-        
+
         // Debounce search
         searchTimeout = setTimeout(() => {
             // Filter products based on search query
-            const suggestions = products.filter(product => 
+            const suggestions = products.filter(product =>
                 product.title.toLowerCase().includes(query) ||
                 product.shortDesc.toLowerCase().includes(query) ||
                 product.category.main.toLowerCase().includes(query) ||
                 product.category.sub.toLowerCase().includes(query)
             );
-            
+
             // Render suggestions
-            suggestionsContainer.innerHTML = suggestions.length ? 
+            suggestionsContainer.innerHTML = suggestions.length ?
                 suggestions.map(product => `
                     <div class="suggestion-item p-2 hover:bg-gray-100 cursor-pointer" data-id="${product.id}">
                         <div class="flex items-center gap-2">
@@ -64,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     </div>
                 `).join('') :
                 '<div class="p-2 text-gray-500">No products found</div>';
-            
+
             // Add click handlers to suggestions
             document.querySelectorAll('.suggestion-item').forEach(item => {
                 item.addEventListener('click', () => {
@@ -75,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     renderFilteredProducts(container, filteredProducts);
                 });
             });
-            
+
             // Update main product grid
             filteredProducts = suggestions;
             renderFilteredProducts(container, filteredProducts);
@@ -151,25 +150,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 function applyFiltersAndSort() {
     const searchInput = document.getElementById('search-input');
     let result = [...products];
-    
+
     // Apply search filter
     const searchQuery = searchInput.value.toLowerCase();
     if (searchQuery) {
-        result = result.filter(product => 
+        result = result.filter(product =>
             product.title.toLowerCase().includes(searchQuery) ||
             product.shortDesc.toLowerCase().includes(searchQuery) ||
             product.category.main.toLowerCase().includes(searchQuery) ||
             product.category.sub.toLowerCase().includes(searchQuery)
         );
     }
-    
+
     // Apply category filter
     if (currentFilter) {
-        result = result.filter(product => 
+        result = result.filter(product =>
             product.category.main === currentFilter
         );
     }
-    
+
     // Apply sorting
     switch (currentSort) {
         case 'price-asc':
@@ -185,6 +184,6 @@ function applyFiltersAndSort() {
             result.sort((a, b) => b.title.localeCompare(a.title));
             break;
     }
-    
+
     return result;
 }
