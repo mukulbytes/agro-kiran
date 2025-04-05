@@ -47,9 +47,67 @@ const productSchema = new mongoose.Schema(
             maxlength: [200, "Short description must not exceed 200 characters"]
         },
         longDesc: {
-            type: String,
-            default: "",
-            trim: true
+            overview: {
+                type: String,
+                required: [true, "Product overview is required"],
+                trim: true
+            },
+            benefits: [{
+                type: String,
+                required: true
+            }],
+            recommendedUsage: [{
+                crop: {
+                    type: String,
+                    required: true
+                },
+                applicationTiming: {
+                    type: String,
+                    required: true
+                },
+                dosagePerAcre: {
+                    type: String,
+                    required: true
+                },
+                notes: String
+            }],
+            nutrientContent: {
+                nitrogen: String,
+                phosphorus: String,
+                potassium: String,
+                form: String
+            },
+            applicationMethod: [{
+                type: String
+            }],
+            storageHandling: [{
+                type: String
+            }],
+            precautions: [{
+                type: String
+            }],
+            soilCompatibility: [{
+                type: String
+            }],
+            regulatoryCompliance: [{
+                type: String
+            }],
+            compatibleFertilizers: [{
+                type: String
+            }],
+            incompatibilities: [{
+                type: String
+            }],
+            faqs: [{
+                question: {
+                    type: String,
+                    required: true
+                },
+                answer: {
+                    type: String,
+                    required: true
+                }
+            }]
         },
         highlights: {
             li1: {

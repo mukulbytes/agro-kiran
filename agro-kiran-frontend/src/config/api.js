@@ -6,6 +6,10 @@ export const API_CONFIG = {
     SIGNUP: '/auth/signup',
     LOGIN: '/auth/login',
     PRODUCTS: '/products',
+    CHAT: {
+      SEND_MESSAGE: '/chat/message',
+      GET_HISTORY: '/chat/history'
+    },
     ADMIN: {
       LOGIN: '/admin/login',
       PRODUCTS: '/admin/products',

@@ -12,6 +12,7 @@ import userRoutes from './routes/userRoutes.js';
 import addressRoutes from './routes/addressRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import chatRoutes from './routes/chatRoutes.js';
 
 dotenv.config();
 
@@ -47,6 +48,13 @@ const adminLoginLimiter = rateLimit({
   message: 'Too many login attempts from this IP, please try again after an hour'
 });
 
+// Chat rate limiter
+const chatLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 20, // limit each IP to 20 messages per minute
+  message: 'Too many messages sent. Please wait a minute before sending more.'
+});
+
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -76,6 +84,7 @@ const upload = multer({
 app.use('/api', generalLimiter);
 app.use(['/api/products/timestamp', '/api/users/cart/timestamp'], timestampLimiter);
 app.use('/api/admin/login', adminLoginLimiter);
+app.use('/api/chat/message', chatLimiter);
 
 // Body parser with increased limits
 app.use(express.json({ limit: '5mb' }));
@@ -91,6 +100,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/addresses', addressRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/chat', chatRoutes);
 
 // Error handling
 app.use(errorHandler);

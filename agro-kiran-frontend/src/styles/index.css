@@ -58,6 +58,40 @@ button {
 .button-primary {
   @apply transition-colors block font-medium text-white text-center duration-150 ease-in-out hover:text-secondary border-2 border-primary hover:border-secondary;
 }
+
+/* Chat Styles */
+.quick-action-btn {
+  @apply w-full flex items-center gap-3 px-4 py-3 text-primary bg-white rounded-lg border-2 border-primary hover:bg-primary hover:text-white transition-colors duration-200;
+}
+
+.chat-message {
+  @apply flex gap-3;
+}
+
+.chat-message.user {
+  @apply flex-row-reverse;
+}
+
+.chat-message.user .message-content {
+  @apply bg-accent text-white rounded-tr-none;
+}
+
+.chat-message .message-content {
+  @apply bg-primary text-white p-3 rounded-lg rounded-tl-none max-w-[80%];
+}
+
+.chat-message .avatar {
+  @apply flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center;
+}
+
+.chat-message.user .avatar {
+  @apply bg-accent;
+}
+
+.chat-message.bot .avatar {
+  @apply bg-primary;
+}
+
 /* Address Form Animations */
 @keyframes slideDown {
   from {

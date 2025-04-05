@@ -49,6 +49,9 @@ export async function renderHeader() {
               <a class="nav-links ${currentPage === '/shop.html' ? 'active-li-header' : ''}" href="shop.html">Shop</a>
             </li>
             <li>
+              <a class="nav-links ${currentPage === '/chat.html' ? 'active-li-header' : ''}" href="chat.html">AI-Chat</a>
+            </li>
+            <li>
               <a class="nav-links ${currentPage === '/about.html' ? 'active-li-header' : ''}" href="about.html">About</a>
             </li>
             <li>
@@ -115,6 +118,9 @@ export async function renderHeader() {
             </li>
             <li>
               <a class="nav-links ${currentPage === '/shop.html' ? 'text-secondary font-bold' : ''}" href="shop.html">Shop</a>
+            </li>
+            <li>
+              <a class="nav-links ${currentPage === '/chat.html' ? 'text-secondary font-bold' : ''}" href="chat.html">AI-Chat</a>
             </li>
             <li>
               <a class="nav-links ${currentPage === '/about.html' ? 'text-secondary font-bold' : ''}" href="about.html">About</a>
