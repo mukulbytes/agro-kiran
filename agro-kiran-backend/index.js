@@ -18,12 +18,17 @@ dotenv.config();
 
 const app = express();
 
+app.set('trust proxy', 1);
 // CORS Configuration
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? 'https://your-production-domain.com'
-    : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:4173'], // Allow these ports in development
-  credentials: true
+    ? ['https://agrokiran.onrender.com', 'https://agro-kiran-admin.onrender.com', 'https://agro-kiran-backend.onrender.com']
+    : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:4173', 'http://localhost:4174'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS','PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
 
 // Security Middleware
@@ -107,8 +112,8 @@ app.use(errorHandler);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("✅ Connected to MongoDB"))
-    .catch(err => console.error("❌ MongoDB connection error:", err));
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch(err => console.error("❌ MongoDB connection error:", err));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
