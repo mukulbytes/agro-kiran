@@ -1,7 +1,6 @@
 import { renderAdminNav } from '../components/adminNav.js';
 import { formatPriceINR, formatDate } from '../utils/utils.js';
 import { showToast } from '../utils/toast.js';
-import { getAuthToken } from '../utils/auth.js';
 import { API_CONFIG } from '../config/api.js';
 import { getAuthHeaders } from '../utils/adminAuth.js';
 

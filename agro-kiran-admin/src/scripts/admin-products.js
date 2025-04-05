@@ -1,5 +1,4 @@
 import { renderAdminNav } from '../components/adminNav.js';
-import { productService } from '../services/productService.js';
 import { API_CONFIG } from '../config/api.js';
 import { getAuthHeaders } from '../utils/adminAuth.js';
 

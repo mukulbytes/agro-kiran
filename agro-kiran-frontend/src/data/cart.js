@@ -37,7 +37,7 @@ async function addToCart(productId, variant = "20kg") {
     const quantity = Number(productQuantityDropdown.value);
     const cart = await userService.getCart();
     const existingItem = cart.find(
-        (item) => item.id === productId && item.variant === variant
+        (item) => item.productId === productId && item.variant === variant
     );
     if (existingItem) {
         existingItem.quantity += quantity;
@@ -72,8 +72,8 @@ export function listenerForAddToCart() {
             const productId = productCard.getAttribute("data-id");
             let variant = "20kg"; // Default variant
 
-            // Check if user selected a different variant (only on product page)
-            const selectedVariant = document.querySelector(".js-variant-radio:checked");
+            // Check if user selected a different variant (scoped to the product card)
+            const selectedVariant = productCard.querySelector(".js-variant-radio:checked");
             if (selectedVariant) {
                 variant = selectedVariant.value;
             }
@@ -83,18 +83,22 @@ export function listenerForAddToCart() {
     });
 }
 
-export async function updateCartQuantity(productId, value) {
+export async function updateCartQuantity(productId, value, variant) {
     const cart = await userService.getCart();
-    let cartItem = cart.find((cartItem) => cartItem.productId === productId);
-    cartItem.quantity = value;
-    saveCart();
+    let cartItem = cart.find((cartItem) => cartItem.productId === productId && cartItem.variant === variant);
+    if (cartItem) {
+        cartItem.quantity = value;
+        await saveCart();
+    }
 }
 
-export async function updateDeliveryOption(productId, deliveryOptionId) {
+export async function updateDeliveryOption(productId, deliveryOptionId, variant) {
     const cart = await userService.getCart();
-    let cartItem = cart.find((cartItem) => cartItem.productId === productId);
-    cartItem.deliveryOptionId = deliveryOptionId;
-    saveCart();
+    let cartItem = cart.find((cartItem) => cartItem.productId === productId && cartItem.variant === variant);
+    if (cartItem) {
+        cartItem.deliveryOptionId = deliveryOptionId;
+        await saveCart();
+    }
 }
 
 export async function deleteFromCart(i) {

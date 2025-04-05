@@ -33,9 +33,10 @@ export function generateDeliveyOptions(productId, cartItem) {
                   type="radio"
                   class="accent-secondary"
                   ${isChecked ? 'checked' : ''}
-                  name="delivery-option-${productId}"
-                  data-product-id= "${productId}"
-                  data-delivery-option-id = "${deliveryOptionId}" 
+                  name="delivery-option-${productId}-${cartItem.variant}"
+                  data-product-id="${productId}"
+                  data-variant="${cartItem.variant}"
+                  data-delivery-option-id="${deliveryOptionId}" 
                 />
                 <div class="flex flex-col gap-1">
                   <div class="text-amber-200 font-bold">${deliveryDate}</div>
@@ -74,17 +75,19 @@ export function calculateDeliveryDate(id) {
     return dayjs().add(finalDeliveryTime, 'days').format('dddd, MMMM DD');
 }
 
-export function renderDeliveryDate(productId, deliveryOptionId) {
-
+export function renderDeliveryDate(productId, deliveryOptionId, variant) {
     //Get All query Nodes for main date heading
     const headingElements = document.querySelectorAll(".js-main-date-heading");
 
     //Find Correct Node
     let finalElement;
     headingElements.forEach(element => {
-        if (element.dataset.productId === productId) {
+        if (element.dataset.productId === productId && element.dataset.variant === variant) {
             finalElement = element;
         }
-    })
-    finalElement.innerHTML = `Delivery date: ${calculateDeliveryDate(deliveryOptionId)}`;
+    });
+    
+    if (finalElement) {
+        finalElement.innerHTML = `Delivery date: ${calculateDeliveryDate(deliveryOptionId)}`;
+    }
 }

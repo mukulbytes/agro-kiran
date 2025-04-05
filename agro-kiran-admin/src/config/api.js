@@ -4,12 +4,16 @@ export const API_CONFIG = {
     ? 'https://agro-kiran-backend.onrender.com/api'
     : 'http://localhost:8080/api',
   ENDPOINTS: {
-    SIGNUP: '/auth/signup',
-    LOGIN: '/auth/login',
     PRODUCTS: '/products',
-    CHAT: {
-      SEND_MESSAGE: '/chat/message',
-      GET_HISTORY: '/chat/history'
+    ADMIN: {
+      LOGIN: '/admin/login',
+      PRODUCTS: '/admin/products',
+      ORDERS: '/admin/orders',
+      STATS: {
+        ORDERS: '/admin/stats/orders',
+        PRODUCTS: '/admin/stats/products',
+        ACTIVITY: '/admin/stats/activity'
+      }
     }
   }
 }; 

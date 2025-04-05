@@ -1,7 +1,6 @@
 import { orderService } from '../services/orderService.js';
 import { renderHeader } from '../components/header.js';
 import { renderFooter } from '../components/footer.js';
-import { showToast } from '../utils/toast.js';
 import { formatPriceINR, formatDate } from '../utils/utils.js';
 
 // Initialize page

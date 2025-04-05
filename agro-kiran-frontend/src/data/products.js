@@ -26,12 +26,12 @@ export async function renderFeaturedProducts() {
                 
                 <!-- Image Div -->
                 <a href="/product.html?id=${product.id}" class="relative flex items-center justify-center bg-center bg-no-repeat bg-contain" style="background-image: url('${bgURL}') !important;">
-                    <img src="${product.img["20kg"]}" class="h-[13rem] md:h-[15rem] xl:h-[20rem] z-[2] drop-shadow-2xl" alt="${product.title}" />
+                    <img src="${product.img["20kg"]}" class="js-product-image h-[13rem] md:h-[15rem] xl:h-[20rem] z-[2] drop-shadow-2xl" alt="${product.title}" />
                 </a>
                 
                 <!-- Product Details Div -->
                 <div class="flex flex-col gap-0.5 xl:gap-3 lg:pl-10 text-white">
-                    <a href="/product.html?id=${product.id}" class="hover:underline text-secondary text-[1.8rem] xs:max-sm:text-[1.45rem] max-lg:self-center font-bold whitespace-nowrap">${product.title}</a >
+                    <a href="/product.html?id=${product.id}" class="hover:underline text-secondary text-[1.8rem] xs:max-sm:text-[1.45rem] max-lg:self-center font-bold whitespace-nowrap js-product-title">${product.title} (20kg)</a >
                     <p class="text-pretty text-sm/[135%] xl:text-lg/[110%] line-clamp-4 lg:hidden xl:block">
                         ${product.shortDesc}
                     </p>
@@ -40,7 +40,27 @@ export async function renderFeaturedProducts() {
                         <li>${product.highlights.li2}</li>
                         <li>${product.highlights.li3}</li>
                     </ul>
-                    <p class="text-[2rem] font-extrabold">${formatPriceINR(product.price["20kg"])}</p>
+
+                    <!-- Variant Selection -->
+                    <div class="js-variant-selection flex flex-row gap-3 mt-3">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="variant-${product.id}" value="5kg" class="js-variant-radio hidden" data-product-id="${product.id}" />
+                            <span class="w-5 h-5 border-2 border-white rounded-full flex items-center justify-center">
+                                <span class="w-3 h-3 bg-secondary rounded-full hidden"></span>
+                            </span>
+                            <span class="font-bold">5kg</span>
+                        </label>
+
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="variant-${product.id}" value="20kg" class="js-variant-radio hidden" data-product-id="${product.id}" checked />
+                            <span class="w-5 h-5 border-2 border-white rounded-full flex items-center justify-center">
+                                <span class="w-3 h-3 bg-secondary rounded-full"></span>
+                            </span>
+                            <span class="font-bold">20kg</span>
+                        </label>
+                    </div>
+
+                    <p class="js-product-price text-[2rem] font-extrabold">${formatPriceINR(product.price["20kg"])}</p>
                     <select
                         name="quantity-selector"
                         id="product-qty"
@@ -66,6 +86,31 @@ export async function renderFeaturedProducts() {
     });
 
     container.innerHTML = productHTML;
+
+    // Add variant change listeners
+    document.querySelectorAll('.js-variant-radio').forEach(radio => {
+        radio.addEventListener('change', function (e) {
+            e.stopPropagation(); // Stop event from bubbling up
+            const productId = this.dataset.productId;
+            const variant = this.value;
+            const productCard = this.closest('.js-product-card');
+            const productImage = productCard.querySelector('.js-product-image');
+            const productTitle = productCard.querySelector('.js-product-title');
+            const productPrice = productCard.querySelector('.js-product-price');
+            const product = products.find(p => p.id === productId);
+
+            // Update image, title and price based on selected variant
+            productImage.src = product.img[variant];
+            productTitle.textContent = `${product.title} (${variant})`;
+            productPrice.textContent = formatPriceINR(product.price[variant]);
+
+            // Update radio button markers
+            const markers = productCard.querySelectorAll('.js-variant-radio + span span');
+            markers.forEach(marker => marker.classList.add('hidden'));
+            this.nextElementSibling.querySelector('span').classList.remove('hidden');
+        });
+    });
+
     listenerForAddToCart();
 }
 
@@ -243,7 +288,7 @@ export async function renderSingleProduct() {
                     <!-- Variant Selection -->
                     <div class="flex flex-row gap-3 mt-3">
                         <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="radio" name="variant" value="5kg" class="js-variant-radio hidden" />
+                            <input type="radio" name="variant-${product.id}" value="5kg" class="js-variant-radio hidden" data-product-id="${product.id}" />
                             <span class="w-5 h-5 border-2 border-white rounded-full flex items-center justify-center">
                                 <span class="w-3 h-3 bg-secondary rounded-full hidden"></span>
                             </span>
@@ -251,7 +296,7 @@ export async function renderSingleProduct() {
                         </label>
 
                         <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="radio" name="variant" value="20kg" class="js-variant-radio hidden" checked />
+                            <input type="radio" name="variant-${product.id}" value="20kg" class="js-variant-radio hidden" data-product-id="${product.id}" checked />
                             <span class="w-5 h-5 border-2 border-white rounded-full flex items-center justify-center">
                                 <span class="w-3 h-3 bg-secondary rounded-full"></span>
                             </span>
@@ -287,7 +332,25 @@ export async function renderSingleProduct() {
 
         // Attach event listeners to variant radio buttons
         document.querySelectorAll(".js-variant-radio").forEach(radio => {
-            radio.addEventListener("change", updateProductView);
+            radio.addEventListener("change", function(e) {
+                e.stopPropagation();
+                const productId = this.dataset.productId;
+                const variant = this.value;
+                const productCard = this.closest('.js-product-card');
+                const productImage = productCard.querySelector('.js-product-image');
+                const productTitle = productCard.querySelector('.js-product-title');
+                const productPrice = productCard.querySelector('.js-product-price');
+
+                // Update image, title and price based on selected variant
+                productImage.src = product.img[variant];
+                productTitle.textContent = `${product.title} (${variant})`;
+                productPrice.textContent = formatPriceINR(product.price[variant]);
+
+                // Update radio button markers
+                const markers = productCard.querySelectorAll('.js-variant-radio + span span');
+                markers.forEach(marker => marker.classList.add('hidden'));
+                this.nextElementSibling.querySelector('span').classList.remove('hidden');
+            });
         });
 
         updateProductView(); // Ensure initial state is correct

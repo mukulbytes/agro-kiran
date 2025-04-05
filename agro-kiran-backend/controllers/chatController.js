@@ -19,7 +19,7 @@ const loadProductKnowledgeBase = async () => {
         .select('title shortDesc slug category.main');
 
     // Create product summaries for the system message
-    const productSummaries = products.map(product => 
+    const productSummaries = products.map(product =>
         `- ${product.title} (slug: ${product.slug}): ${product.longDesc}`
     ).join('\n');
 
@@ -38,7 +38,7 @@ const loadProductKnowledgeBase = async () => {
 // System message to set the AI's context and behavior
 const getSystemMessage = async () => {
     const { summaries } = await loadProductKnowledgeBase();
-    
+
     return {
         role: "system",
         content: `You are an AI assistant for Agro Kiran, an agricultural e-commerce platform specializing in fertilizers.

@@ -1,5 +1,3 @@
-import { API_CONFIG } from '../config/api.js';
-
 // Get admin token from localStorage
 export const getAdminToken = () => {
   return localStorage.getItem('adminToken');

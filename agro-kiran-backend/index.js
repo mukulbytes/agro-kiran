@@ -22,7 +22,7 @@ const app = express();
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
     ? 'https://your-production-domain.com'
-    : ['http://localhost:5173', 'http://localhost:3000'], // Allow both ports in development
+    : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:4173'], // Allow these ports in development
   credentials: true
 }));
 

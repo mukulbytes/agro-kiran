@@ -40,6 +40,7 @@ export async function updateCartSummary() {
                     <div
                         class="js-main-date-heading text-secondary font-bold text-center text-xl lg:text-left md:text-3xl mb-5"
                         data-product-id="${productId}"
+                        data-variant="${cartItem.variant}"
                         data-delivery-option-id="${deliveryOptionId}"
                     >
                         Delivery date: <span class="block md:inline"> ${deliveryDate} </span>
@@ -94,12 +95,15 @@ export async function updateCartSummary() {
 
     async function handleUpdate(index) {
         const cart = await userService.getCart();
-        //fecth the current button
+        //fetch the current button
         let btn = saveButtons[index];
         let { productId } = btn.dataset;
         let value = Number(quantityInputs[index].value);
-        let i = cart.findIndex(cartItem => cartItem.productId === productId);
+        let cartItem = cart.find(item => item.productId === productId);
+        if (!cartItem) return;
+
         if (value === 0) {
+            let i = cart.findIndex(item => item.productId === productId && item.variant === cartItem.variant);
             deleteFromCart(i);
             updatePaymentSummary();
         }
@@ -107,7 +111,7 @@ export async function updateCartSummary() {
             alert('Invalid Quantity');
         }
         else {
-            updateCartQuantity(productId, value);
+            updateCartQuantity(productId, value, cartItem.variant);
             updatePaymentSummary();
             quantityDisplay[index].innerHTML = `Quantity: ${value}`;
             btn.classList.toggle("hidden")
@@ -153,10 +157,11 @@ export async function updateCartSummary() {
     optionElements.forEach(opt => {
         opt.addEventListener('click', () => {
             const productId = opt.dataset.productId;
+            const variant = opt.dataset.variant;
             const deliveryOptionId = opt.dataset.deliveryOptionId;
-            updateDeliveryOption(productId, deliveryOptionId);
-            renderDeliveryDate(productId, deliveryOptionId);
+            updateDeliveryOption(productId, deliveryOptionId, variant);
+            renderDeliveryDate(productId, deliveryOptionId, variant);
             updatePaymentSummary();
-        })
-    })
+        });
+    });
 }

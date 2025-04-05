@@ -20,7 +20,7 @@
 
         <!-- Product Form -->
         <div class="bg-accent rounded-xl p-6 shadow-lg border-2 border-secondary">
-          <form id="product-form" class="space-y-4">
+          <form id="product-form" class="space-y-6">
             <input type="hidden" name="id">
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -84,10 +84,144 @@
                         class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"></textarea>
             </div>
 
-            <div>
-              <label class="block text-white mb-1">Long Description (Optional)</label>
-              <textarea name="longDesc" rows="3"
-                        class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"></textarea>
+            <div class="space-y-4">
+              <h3 class="text-white text-xl font-semibold mb-4">Detailed Information</h3>
+              
+              <div>
+                <label class="block text-white mb-1">Product Overview</label>
+                <textarea name="overview" rows="3" required
+                          class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-white mb-1">Benefits (One per line)</label>
+                <textarea name="benefits" rows="4"
+                          class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"
+                          placeholder="Enter each benefit on a new line"></textarea>
+              </div>
+
+              <div>
+                <label class="block text-white mb-2">Recommended Usage</label>
+                <div id="usage-container" class="space-y-4">
+                  <div class="usage-entry grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-primary/30 rounded-lg">
+                    <div>
+                      <label class="block text-white/70 text-sm mb-1">Crop</label>
+                      <input type="text" name="usage_crop[]" 
+                             class="w-full bg-primary/20 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                    </div>
+                    <div>
+                      <label class="block text-white/70 text-sm mb-1">Application Timing</label>
+                      <input type="text" name="usage_timing[]"
+                             class="w-full bg-primary/20 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                    </div>
+                    <div>
+                      <label class="block text-white/70 text-sm mb-1">Dosage per Acre</label>
+                      <input type="text" name="usage_dosage[]"
+                             class="w-full bg-primary/20 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                    </div>
+                    <div>
+                      <label class="block text-white/70 text-sm mb-1">Notes (Optional)</label>
+                      <input type="text" name="usage_notes[]"
+                             class="w-full bg-primary/20 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                    </div>
+                  </div>
+                </div>
+                <button type="button" id="add-usage" class="mt-2 px-4 py-2 text-white hover:text-secondary">
+                  + Add More Usage Instructions
+                </button>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-white mb-1">Nutrient Content</label>
+                  <div class="space-y-2">
+                    <input type="text" name="nutrient_nitrogen" placeholder="Nitrogen (N)"
+                           class="w-full bg-primary/20 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                    <input type="text" name="nutrient_phosphorus" placeholder="Phosphorus (P)"
+                           class="w-full bg-primary/20 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                    <input type="text" name="nutrient_potassium" placeholder="Potassium (K)"
+                           class="w-full bg-primary/20 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                    <input type="text" name="nutrient_form" placeholder="Form (e.g., Granular)"
+                           class="w-full bg-primary/20 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-white mb-1">Application Methods (One per line)</label>
+                  <textarea name="application_methods" rows="4"
+                            class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"
+                            placeholder="Enter each method on a new line"></textarea>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-white mb-1">Storage & Handling (One per line)</label>
+                  <textarea name="storage_handling" rows="4"
+                            class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"
+                            placeholder="Enter each instruction on a new line"></textarea>
+                </div>
+
+                <div>
+                  <label class="block text-white mb-1">Precautions (One per line)</label>
+                  <textarea name="precautions" rows="4"
+                            class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"
+                            placeholder="Enter each precaution on a new line"></textarea>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-white mb-1">Soil Compatibility (One per line)</label>
+                  <textarea name="soil_compatibility" rows="4"
+                            class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"
+                            placeholder="Enter each soil type on a new line"></textarea>
+                </div>
+
+                <div>
+                  <label class="block text-white mb-1">Regulatory Compliance (One per line)</label>
+                  <textarea name="regulatory_compliance" rows="4"
+                            class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"
+                            placeholder="Enter each compliance on a new line"></textarea>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-white mb-1">Compatible Fertilizers (One per line)</label>
+                  <textarea name="compatible_fertilizers" rows="4"
+                            class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"
+                            placeholder="Enter each compatible fertilizer on a new line"></textarea>
+                </div>
+
+                <div>
+                  <label class="block text-white mb-1">Incompatibilities (One per line)</label>
+                  <textarea name="incompatibilities" rows="4"
+                            class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"
+                            placeholder="Enter each incompatibility on a new line"></textarea>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-white mb-2">FAQs</label>
+                <div id="faq-container" class="space-y-4">
+                  <div class="faq-entry grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-primary/30 rounded-lg">
+                    <div>
+                      <label class="block text-white/70 text-sm mb-1">Question</label>
+                      <input type="text" name="faq_question[]"
+                             class="w-full bg-primary/20 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                    </div>
+                    <div>
+                      <label class="block text-white/70 text-sm mb-1">Answer</label>
+                      <input type="text" name="faq_answer[]"
+                             class="w-full bg-primary/20 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                    </div>
+                  </div>
+                </div>
+                <button type="button" id="add-faq" class="mt-2 px-4 py-2 text-white hover:text-secondary">
+                  + Add More FAQ
+                </button>
+              </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">

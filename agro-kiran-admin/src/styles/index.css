@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
+@import "tailwindcss";
+
+/* @import "./hero.css"; */
+
+@theme {
+  --color-primary: #054635;
+  --color-secondary: #fab12f;
+  --color-accent: rgb(8, 117, 89);
+  --breakpoint-xs: 376px;
+  --font-quicksand: "Quicksand", serif;
+
+  /* Flower left right top values for different screen sizes */
+  --lrt-def: -20dvw;
+  --lrt-sm: -15dvw;
+  --lrt-md: -13dvw;
+  --lrt-2xl: -11dvw;
+}
+
+/* Keyboard Controls Outline */
+a,
+button {
+  @apply focus-visible:outline-amber-400 focus-visible:outline-4 cursor-pointer;
+}
+.toast {
+  @apply flex items-center gap-3 px-4 py-2 rounded-lg shadow-lg bg-amber-100 text-primary transition-opacity duration-300 ease-in-out;
+}
+.toast i {
+  @apply text-accent;
+}
+.user-form-inputs {
+  @apply w-full text-primary px-3 py-2 border-2 rounded-lg border-primary placeholder:text-primary/50 focus:outline-secondary focus:outline-2;
+}
+.user-form-labels {
+  @apply block text-primary;
+}
+.shop-inputs {
+  @apply min-w-15 px-4 py-2 bg-accent text-amber-200 focus:outline-none focus:ring-2 focus:ring-secondary cursor-pointer;
+}
+.active {
+  @apply border-b-3 border-primary;
+}
+.profile-labels {
+  @apply text-white font-medium;
+}
+.profile-inputs {
+  @apply text-white border border-amber-300 w-full px-3 py-2 rounded-lg placeholder:text-white/50 focus:outline-secondary focus:outline-2;
+}
+.profile-inputs:disabled {
+  @apply bg-gray-700/50 border-gray-600 cursor-not-allowed;
+}
+.button-primary {
+  @apply transition-colors block font-medium text-white text-center duration-150 ease-in-out hover:text-secondary border-2 border-primary hover:border-secondary;
+}
+
+/* Chat Styles */
+.quick-action-btn {
+  @apply w-full flex items-center gap-3 px-4 py-3 text-primary bg-white rounded-lg border-2 border-primary hover:bg-primary hover:text-white transition-colors duration-200;
+}
+
+.chat-message {
+  @apply flex gap-3;
+}
+
+.chat-message.user {
+  @apply flex-row-reverse;
+}
+
+.chat-message.user .message-content {
+  @apply bg-accent text-white rounded-tr-none;
+}
+
+.chat-message .message-content {
+  @apply bg-primary text-white p-3 rounded-lg rounded-tl-none max-w-[80%];
+}
+
+.chat-message .avatar {
+  @apply flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center;
+}
+
+.chat-message.user .avatar {
+  @apply bg-accent;
+}
+
+.chat-message.bot .avatar {
+  @apply bg-primary;
+}
+
+/* Modal Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(10%);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.2s ease-out forwards;
+}
+
+.animate-fadeOut {
+    animation: fadeOut 0.2s ease-out forwards;
+}
+
+.animate-slideIn {
+    animation: slideIn 0.2s ease-out forwards;
+}
+
+.animate-slideOut {
+    animation: slideOut 0.2s ease-out forwards;
+}
