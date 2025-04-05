@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Agro Kiran</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body class="bg-primary min-h-screen">
+    <div class="flex">
+      <!-- Admin Sidebar -->
+      <div class="js-admin-sidebar"></div>
+
+      <!-- Main Content -->
+      <main class="ml-64 flex-1 p-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+          <h1 class="text-white text-3xl font-bold">Dashboard Overview</h1>
+          <div class="flex items-center gap-4">
+            <button class="text-white bg-accent hover:bg-accent/80 px-4 py-2 rounded-lg transition-colors">
+              <i class="fas fa-bell"></i>
+            </button>
+            <div class="flex items-center text-white bg-accent px-4 py-2 rounded-lg">
+              <i class="fas fa-user-circle text-xl mr-2"></i>
+              <span>Admin User</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="bg-accent p-6 rounded-xl shadow-lg border-2 border-secondary">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-white/80 text-sm">Total Sales</p>
+                <h3 class="text-white text-2xl font-bold">₹45,678</h3>
+              </div>
+              <div class="bg-primary/20 p-3 rounded-full">
+                <i class="fas fa-chart-line text-secondary text-xl"></i>
+              </div>
+            </div>
+            <p class="text-green-400 text-sm mt-2">
+              <i class="fas fa-arrow-up"></i>
+              <span class="ml-1">12% from last month</span>
+            </p>
+          </div>
+
+          <div class="bg-accent p-6 rounded-xl shadow-lg border-2 border-secondary">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-white/80 text-sm">Total Orders</p>
+                <h3 class="text-white text-2xl font-bold">234</h3>
+              </div>
+              <div class="bg-primary/20 p-3 rounded-full">
+                <i class="fas fa-shopping-cart text-secondary text-xl"></i>
+              </div>
+            </div>
+            <p class="text-green-400 text-sm mt-2">
+              <i class="fas fa-arrow-up"></i>
+              <span class="ml-1">8% from last month</span>
+            </p>
+          </div>
+
+          <div class="bg-accent p-6 rounded-xl shadow-lg border-2 border-secondary">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-white/80 text-sm">Total Products</p>
+                <h3 class="text-white text-2xl font-bold">156</h3>
+              </div>
+              <div class="bg-primary/20 p-3 rounded-full">
+                <i class="fas fa-box text-secondary text-xl"></i>
+              </div>
+            </div>
+            <p class="text-amber-400 text-sm mt-2">
+              <i class="fas fa-arrow-right"></i>
+              <span class="ml-1">Same as last month</span>
+            </p>
+          </div>
+
+          <div class="bg-accent p-6 rounded-xl shadow-lg border-2 border-secondary">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-white/80 text-sm">Active Users</p>
+                <h3 class="text-white text-2xl font-bold">1,234</h3>
+              </div>
+              <div class="bg-primary/20 p-3 rounded-full">
+                <i class="fas fa-users text-secondary text-xl"></i>
+              </div>
+            </div>
+            <p class="text-green-400 text-sm mt-2">
+              <i class="fas fa-arrow-up"></i>
+              <span class="ml-1">24% from last month</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Recent Orders Table -->
+        <div class="bg-accent rounded-xl p-6 shadow-lg border-2 border-secondary mb-8">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-white text-xl font-semibold">Recent Orders</h2>
+            <button class="text-secondary hover:text-white transition-colors">View All</button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-white">
+              <thead class="text-secondary border-b border-primary/20">
+                <tr>
+                  <th class="py-3 px-4 text-left">Order ID</th>
+                  <th class="py-3 px-4 text-left">Customer</th>
+                  <th class="py-3 px-4 text-left">Product</th>
+                  <th class="py-3 px-4 text-left">Amount</th>
+                  <th class="py-3 px-4 text-left">Status</th>
+                  <th class="py-3 px-4 text-left">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-primary/10">
+                  <td class="py-3 px-4">#ORD-001</td>
+                  <td class="py-3 px-4">John Doe</td>
+                  <td class="py-3 px-4">Organic Fertilizer</td>
+                  <td class="py-3 px-4">₹1,200</td>
+                  <td class="py-3 px-4">
+                    <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded-full text-sm">Delivered</span>
+                  </td>
+                  <td class="py-3 px-4">
+                    <button class="text-secondary hover:text-white transition-colors mr-2">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="text-secondary hover:text-white transition-colors">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="border-b border-primary/10">
+                  <td class="py-3 px-4">#ORD-002</td>
+                  <td class="py-3 px-4">Jane Smith</td>
+                  <td class="py-3 px-4">Seeds Pack</td>
+                  <td class="py-3 px-4">₹800</td>
+                  <td class="py-3 px-4">
+                    <span class="bg-amber-500/20 text-amber-400 px-2 py-1 rounded-full text-sm">Processing</span>
+                  </td>
+                  <td class="py-3 px-4">
+                    <button class="text-secondary hover:text-white transition-colors mr-2">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="text-secondary hover:text-white transition-colors">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="border-b border-primary/10">
+                  <td class="py-3 px-4">#ORD-003</td>
+                  <td class="py-3 px-4">Mike Johnson</td>
+                  <td class="py-3 px-4">Garden Tools Set</td>
+                  <td class="py-3 px-4">₹2,500</td>
+                  <td class="py-3 px-4">
+                    <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded-full text-sm">Shipped</span>
+                  </td>
+                  <td class="py-3 px-4">
+                    <button class="text-secondary hover:text-white transition-colors mr-2">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="text-secondary hover:text-white transition-colors">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Product Management -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="bg-accent rounded-xl p-6 shadow-lg border-2 border-secondary">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-white text-xl font-semibold">Low Stock Products</h2>
+              <a href="admin-products.html" class="text-secondary hover:text-white transition-colors">Manage Stock</a>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between p-3 bg-primary/10 rounded-lg">
+                <div class="flex items-center gap-3">
+                  <div class="bg-primary/20 p-2 rounded-lg">
+                    <i class="fas fa-seedling text-secondary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-medium">Organic Seeds</h4>
+                    <p class="text-white/70 text-sm">Stock: 5 units</p>
+                  </div>
+                </div>
+                <button class="text-secondary hover:text-white transition-colors">
+                  <i class="fas fa-plus-circle"></i>
+                </button>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-primary/10 rounded-lg">
+                <div class="flex items-center gap-3">
+                  <div class="bg-primary/20 p-2 rounded-lg">
+                    <i class="fas fa-flask text-secondary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-medium">Bio Fertilizer</h4>
+                    <p class="text-white/70 text-sm">Stock: 8 units</p>
+                  </div>
+                </div>
+                <button class="text-secondary hover:text-white transition-colors">
+                  <i class="fas fa-plus-circle"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-accent rounded-xl p-6 shadow-lg border-2 border-secondary">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-white text-xl font-semibold">Top Selling Products</h2>
+              <button class="text-secondary hover:text-white transition-colors">View Report</button>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="bg-primary/20 p-2 rounded-lg">
+                    <i class="fas fa-leaf text-secondary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-medium">Premium Fertilizer</h4>
+                    <p class="text-white/70 text-sm">1,234 units sold</p>
+                  </div>
+                </div>
+                <div class="text-green-400">
+                  <i class="fas fa-chart-line mr-1"></i>
+                  +15%
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="bg-primary/20 p-2 rounded-lg">
+                    <i class="fas fa-tools text-secondary"></i>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-medium">Garden Tool Kit</h4>
+                    <p class="text-white/70 text-sm">856 units sold</p>
+                  </div>
+                </div>
+                <div class="text-green-400">
+                  <i class="fas fa-chart-line mr-1"></i>
+                  +12%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://kit.fontawesome.com/10b097dc47.js" crossorigin="anonymous"></script>
+    <script type="module">
+      import { renderAdminNav } from './components/adminNav.js';
+      
+      // Initialize the page
+      document.addEventListener('DOMContentLoaded', () => {
+        // Render admin navigation
+        renderAdminNav();
+      });
+    </script>
+  </body>
+</html> 

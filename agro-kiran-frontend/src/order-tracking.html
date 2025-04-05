@@ -21,11 +21,8 @@
 
         <!-- Order Status Timeline -->
         <div class="relative">
-          <!-- Progress Bar -->
-          <div class="js-progress-bar absolute top-5 left-0 h-2 bg-secondary transition-all duration-500"></div>
-          
           <!-- Status Steps -->
-          <div class="js-status-steps grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div class="js-status-steps grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
             <div class="status-step" data-status="order_received">
               <div class="flex items-center">
                 <div class="status-circle w-10 h-10 rounded-full border-4 border-gray-300 bg-white flex items-center justify-center">
@@ -86,13 +83,14 @@
               </div>
             </div>
           </div>
+
+          <!-- Progress Bar -->
+          <div class="js-progress-bar h-2 bg-secondary transition-all duration-500 rounded-full mt-5"></div>
         </div>
 
         <!-- Back to Orders Button -->
         <div class="mt-8 text-center">
-          <a href="profile.html" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-accent transition-colors">
-            Back to Orders
-          </a>
+          <a href="profile.html" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-accent transition-colors"> Back to Orders </a>
         </div>
       </div>
     </main>
@@ -102,4 +100,4 @@
     <script src="https://kit.fontawesome.com/10b097dc47.js" crossorigin="anonymous"></script>
     <script type="module" src="scripts/order-tracking.js"></script>
   </body>
-</html> 
+</html>

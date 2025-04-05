@@ -23,7 +23,7 @@ async function loadOrderDetails() {
 
     const order = await orderService.getOrderDetails(orderId);
     renderOrderDetails(order);
-    updateOrderStatus(order.status, order.statusHistory);
+    updateOrderStatus(order.status, order.statusHistory || []);
   } catch (error) {
     console.error('Error loading order details:', error);
     showToast('Error loading order details', 'error');
@@ -54,7 +54,7 @@ function renderOrderDetails(order) {
           ${order.items.map(item => `
             <div class="flex justify-between items-center">
               <div>
-                <p class="font-medium">${item.product.title} (${item.size})</p>
+                <p class="font-medium">${item.product.title} (${item.variant})</p>
                 <p class="text-sm text-gray-600">Quantity: ${item.quantity}</p>
               </div>
               <p class="font-medium">${formatPriceINR(item.price * item.quantity)}</p>
@@ -102,13 +102,23 @@ function renderOrderDetails(order) {
 }
 
 // Update order status display
-function updateOrderStatus(currentStatus, statusHistory) {
+function updateOrderStatus(currentStatus, statusHistory = []) {
   const statusSteps = document.querySelectorAll('.status-step');
   const progressBar = document.querySelector('.js-progress-bar');
+  
+  if (!progressBar) {
+    console.warn('Progress bar element not found');
+    return;
+  }
   
   // Define status order
   const statusOrder = ['order_received', 'packing', 'shipping', 'out_for_delivery', 'delivered'];
   const currentIndex = statusOrder.indexOf(currentStatus);
+  
+  if (currentIndex === -1) {
+    console.warn('Invalid status:', currentStatus);
+    return;
+  }
   
   // Calculate progress percentage
   const progressPercentage = (currentIndex / (statusOrder.length - 1)) * 100;
@@ -116,15 +126,19 @@ function updateOrderStatus(currentStatus, statusHistory) {
 
   // Update each status step
   statusSteps.forEach(step => {
+    if (!step) return;
+    
     const status = step.dataset.status;
+    if (!status) return;
+    
     const statusIndex = statusOrder.indexOf(status);
-    const statusTime = statusHistory.find(h => h.status === status)?.timestamp;
+    const statusTime = statusHistory.find(h => h?.status === status)?.timestamp;
 
     // Update circle and icon color
     const circle = step.querySelector('.status-circle');
-    const icon = circle.querySelector('i');
+    const icon = circle?.querySelector('i');
     
-    if (statusIndex <= currentIndex) {
+    if (circle && icon && statusIndex <= currentIndex) {
       circle.classList.remove('border-gray-300');
       circle.classList.add('border-secondary');
       icon.classList.remove('text-gray-300');
@@ -133,7 +147,7 @@ function updateOrderStatus(currentStatus, statusHistory) {
 
     // Update timestamp if available
     const timeEl = step.querySelector('.js-status-time');
-    if (statusTime) {
+    if (timeEl && statusTime) {
       timeEl.textContent = formatDate(statusTime);
     }
   });

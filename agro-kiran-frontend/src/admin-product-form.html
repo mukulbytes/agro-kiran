@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Form - Agro Kiran Admin</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body class="bg-primary min-h-screen">
+    <div class="flex">
+      <!-- Admin Sidebar -->
+      <div class="js-admin-sidebar"></div>
+
+      <!-- Main Content -->
+      <main class="ml-64 flex-1 p-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+          <h1 id="page-title" class="text-white text-3xl font-bold">Add New Product</h1>
+        </div>
+
+        <!-- Product Form -->
+        <div class="bg-accent rounded-xl p-6 shadow-lg border-2 border-secondary">
+          <form id="product-form" class="space-y-4">
+            <input type="hidden" name="id">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-white mb-1">Product ID</label>
+                <input type="text" name="productId"
+                       class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"
+                       placeholder="e.g., organic-fertilizer-01">
+                <p class="text-white/70 text-sm mt-1">Only lowercase letters, numbers, hyphens (-) and underscores (_)</p>
+              </div>
+              
+              <div>
+                <label class="block text-white mb-1">Product Title</label>
+                <input type="text" name="title" required
+                       class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary">
+              </div>
+              
+              <div>
+                <label class="block text-white mb-1">Main Category</label>
+                <select name="categoryMain" required
+                        class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                  <option value="">Select Category</option>
+                  <option value="Inorganic Fertilizers">Inorganic Fertilizers</option>
+                  <option value="Organic Fertilizers">Organic Fertilizers</option>
+                  <option value="Slow Release Fertilizers">Slow Release Fertilizers</option>
+                  <option value="Liquid Fertilizers">Liquid Fertilizers</option>
+                  <option value="Foliar Fertilizers">Foliar Fertilizers</option>
+                  <option value="Specialty Fertilizers">Specialty Fertilizers</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-white mb-1">Sub Category</label>
+                <input type="text" name="categorySub" required
+                       class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary">
+              </div>
+
+              <div>
+                <label class="block text-white mb-1">Status</label>
+                <select name="status" required
+                        class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="out_of_stock">Out of Stock</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-white mb-1">Featured Product</label>
+                <select name="featured" required
+                        class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-white mb-1">Short Description</label>
+              <textarea name="shortDesc" rows="2" required
+                        class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-white mb-1">Long Description (Optional)</label>
+              <textarea name="longDesc" rows="3"
+                        class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-white mb-1">Highlight 1</label>
+                <input type="text" name="highlight1" required
+                       class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary">
+              </div>
+              <div>
+                <label class="block text-white mb-1">Highlight 2</label>
+                <input type="text" name="highlight2" required
+                       class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary">
+              </div>
+              <div>
+                <label class="block text-white mb-1">Highlight 3</label>
+                <input type="text" name="highlight3" required
+                       class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <!-- 5kg Package -->
+              <div class="space-y-4">
+                <h3 class="text-white font-semibold">5kg Package</h3>
+                <div>
+                  <label class="block text-white mb-1">Price (₹)</label>
+                  <input type="number" name="price5kg" required min="0" step="0.01"
+                         class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary">
+                </div>
+                <div>
+                  <label class="block text-white mb-1">Stock Quantity</label>
+                  <input type="number" name="stock5kg" required min="0"
+                         class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary">
+                </div>
+                <div>
+                  <label class="block text-white mb-1">Product Image (5kg)</label>
+                  <div class="flex items-center gap-4">
+                    <input type="file" name="image5kg" accept="image/*" data-size="5kg"
+                           class="text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-secondary file:text-primary hover:file:bg-secondary/90">
+                    <img id="image-preview-5kg" class="hidden h-20 w-20 object-cover rounded-lg border-2 border-secondary">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 20kg Package -->
+              <div class="space-y-4">
+                <h3 class="text-white font-semibold">20kg Package</h3>
+                <div>
+                  <label class="block text-white mb-1">Price (₹)</label>
+                  <input type="number" name="price20kg" required min="0" step="0.01"
+                         class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary">
+                </div>
+                <div>
+                  <label class="block text-white mb-1">Stock Quantity</label>
+                  <input type="number" name="stock20kg" required min="0"
+                         class="w-full bg-primary/20 text-white px-4 py-2 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary">
+                </div>
+                <div>
+                  <label class="block text-white mb-1">Product Image (20kg)</label>
+                  <div class="flex items-center gap-4">
+                    <input type="file" name="image20kg" accept="image/*" data-size="20kg"
+                           class="text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-secondary file:text-primary hover:file:bg-secondary/90">
+                    <img id="image-preview-20kg" class="hidden h-20 w-20 object-cover rounded-lg border-2 border-secondary">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-end gap-4 mt-6">
+              <a href="admin-products.html" 
+                 class="px-6 py-2 rounded-lg border-2 border-white text-white hover:border-secondary hover:text-secondary transition-colors">
+                Cancel
+              </a>
+              <button type="submit"
+                      class="px-6 py-2 rounded-lg bg-secondary text-primary hover:bg-secondary/90 transition-colors">
+                Save Product
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://kit.fontawesome.com/10b097dc47.js" crossorigin="anonymous"></script>
+    <script type="module" src="scripts/admin-product-form.js"></script>
+  </body>
+</html> 

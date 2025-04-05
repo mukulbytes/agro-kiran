@@ -121,8 +121,6 @@ export const getUserOrders = catchAsync(async (req, res) => {
 
 // Get order details
 export const getOrderDetails = catchAsync(async (req, res) => {
-  console.log("Request Received here");
-  console.log(req.params);
   const order = await Order.findOne({
     _id: req.params.id,
     $or: [
@@ -136,8 +134,6 @@ export const getOrderDetails = catchAsync(async (req, res) => {
     localField: 'items.productId',
     foreignField: 'id'
   });
-
-  console.log(order);
   if (!order) {
     throw new AppError('Order not found', 404);
   }
@@ -166,7 +162,12 @@ export const getOrderDetails = catchAsync(async (req, res) => {
     deliveryOption: {
       cost: order.deliveryOption.cost,
       estimatedDeliveryDate: order.deliveryOption.estimatedDeliveryDate
-    }
+    },
+    status: order.status || 'order_received',
+    statusHistory: order.statusHistory || [{
+      status: order.status || 'order_received',
+      timestamp: order.createdAt
+    }]
   };
 
   res.status(200).json({
@@ -179,15 +180,23 @@ export const getOrderDetails = catchAsync(async (req, res) => {
 export const updateOrderStatus = catchAsync(async (req, res) => {
   const { status } = req.body;
 
-  const order = await Order.findByIdAndUpdate(
-    req.params.id,
-    { status },
-    { new: true, runValidators: true }
-  );
-
+  const order = await Order.findById(req.params.id);
+  
   if (!order) {
     throw new AppError('Order not found', 404);
   }
+
+  // Update status and add to history
+  order.status = status;
+  if (!order.statusHistory) {
+    order.statusHistory = [];
+  }
+  order.statusHistory.push({
+    status,
+    timestamp: new Date()
+  });
+
+  await order.save();
 
   res.status(200).json({
     status: 'success',
@@ -232,5 +241,52 @@ export const getDeliveryOptions = catchAsync(async (req, res) => {
   res.status(200).json({
     status: 'success',
     data: deliveryOptions
+  });
+});
+
+// Get all orders (admin only)
+export const getAllOrders = catchAsync(async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+  const status = req.query.status;
+  const search = req.query.search;
+
+  // Build query
+  let query = {};
+
+  // Add status filter if provided
+  if (status) {
+    query.status = status;
+  }
+
+  // Add search filter if provided
+  if (search) {
+    query.$or = [
+      { '_id': { $regex: search, $options: 'i' } },
+      { 'shippingAddress.fullName': { $regex: search, $options: 'i' } },
+      { 'guestInfo.email': { $regex: search, $options: 'i' } }
+    ];
+  }
+
+  // Execute query with pagination
+  const [orders, total] = await Promise.all([
+    Order.find(query)
+      .populate({
+        path: 'user',
+        select: 'name email'
+      })
+      .sort('-createdAt')
+      .skip(skip)
+      .limit(limit),
+    Order.countDocuments(query)
+  ]);
+
+  res.status(200).json({
+    status: 'success',
+    total,
+    page,
+    pages: Math.ceil(total / limit),
+    data: orders
   });
 }); 

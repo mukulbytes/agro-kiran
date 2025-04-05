@@ -5,6 +5,16 @@ export const API_CONFIG = {
   ENDPOINTS: {
     SIGNUP: '/auth/signup',
     LOGIN: '/auth/login',
-    PRODUCTS: '/products'
+    PRODUCTS: '/products',
+    ADMIN: {
+      LOGIN: '/admin/login',
+      PRODUCTS: '/admin/products',
+      ORDERS: '/admin/orders',
+      STATS: {
+        ORDERS: '/admin/stats/orders',
+        PRODUCTS: '/admin/stats/products',
+        ACTIVITY: '/admin/stats/activity'
+      }
+    }
   }
 }; 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login - Agro Kiran</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+  </head>
+  <body class="bg-primary min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full mx-4">
+      <div class="bg-accent rounded-xl p-8 shadow-2xl border-2 border-secondary">
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-bold text-white mb-2">Admin Login</h1>
+          <p class="text-white/70">Sign in to access the admin dashboard</p>
+        </div>
+
+        <form id="login-form" class="space-y-6">
+          <div>
+            <label for="email" class="block text-white mb-2">Email Address</label>
+            <input type="email" id="email" name="email" required
+                   class="w-full bg-primary/20 text-white px-4 py-3 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"
+                   placeholder="Enter your email">
+          </div>
+
+          <div>
+            <label for="password" class="block text-white mb-2">Password</label>
+            <input type="password" id="password" name="password" required
+                   class="w-full bg-primary/20 text-white px-4 py-3 rounded-lg placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-secondary"
+                   placeholder="Enter your password">
+          </div>
+
+          <div id="error-message" class="hidden text-red-500 text-sm"></div>
+
+          <button type="submit"
+                  class="w-full bg-secondary text-primary font-semibold py-3 rounded-lg hover:bg-secondary/90 transition-colors">
+            Sign In
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="scripts/admin-login.js"></script>
+  </body>
+</html> 
