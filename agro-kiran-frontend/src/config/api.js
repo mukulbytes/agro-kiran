@@ -1,4 +1,4 @@
-const node_environment = "development";
+const node_environment = "production";
 export const API_CONFIG = {
   BASE_URL: node_environment === 'production'
     ? 'https://agro-kiran-backend.onrender.com/api'
