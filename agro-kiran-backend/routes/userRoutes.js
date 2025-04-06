@@ -9,7 +9,11 @@ import {
   getCart,
   updateCart,
   mergeCart,
-  getCartTimestamp
+  getCartTimestamp,
+  getWishlist,
+  getWishlistTimestamp,
+  addToWishlist,
+  removeFromWishlist
 } from '../controllers/userController.js';
 
 const router = express.Router();
@@ -27,5 +31,11 @@ router.get('/cart', getCart);
 router.get('/cart/timestamp', getCartTimestamp);
 router.patch('/cart', updateCart);
 router.post('/cart/merge', mergeCart);
+
+// Wishlist routes
+router.get('/wishlist', getWishlist);
+router.get('/wishlist/timestamp', getWishlistTimestamp);
+router.post('/wishlist', addToWishlist);
+router.delete('/wishlist/:productId', removeFromWishlist);
 
 export default router; 

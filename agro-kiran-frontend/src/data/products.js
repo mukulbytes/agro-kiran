@@ -3,8 +3,20 @@ import productbg from "../assets/Product-bg.png"
 import { listenerForAddToCart } from "./cart.js";
 import { formatPriceINR } from "../utils/utils.js";
 import { productService } from '../services/productService.js';
+import { listenerForWishlist, initializeWishlistState } from './wishlist.js';
 
 const bgURL = new URL(productbg, import.meta.url).href;
+
+// Add wishlist button HTML helper
+function getWishlistButtonHTML(productId) {
+    return `
+        <button class="js-wishlist-btn absolute top-2 right-2 z-10 p-2 rounded-full bg-accent/50 hover:bg-accent duration-200" data-product-id="${productId}">
+            <svg class="heart-icon w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+        </button>
+    `;
+}
 
 export async function renderFeaturedProducts() {
     const container = document.querySelector('.js-featured-products-container');
@@ -23,6 +35,7 @@ export async function renderFeaturedProducts() {
         productHTML += `
             <div class="js-product-card grid grid-cols-1 lg:grid-cols-2 relative bg-accent rounded-2xl shadow-xs z-8 p-3 lg:py-10 lg:pr-10 justify-center items-center max-w-[50rem] ease-in-out duration-200 hover:shadow-2xl" data-id="${product.id}">
                     <img src="${flower}" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
+                    ${getWishlistButtonHTML(product.id)}
                 
                 <!-- Image Div -->
                 <a href="/product.html?id=${product.id}" class="relative flex items-center justify-center bg-center bg-no-repeat bg-contain" style="background-image: url('${bgURL}') !important;">
@@ -112,6 +125,8 @@ export async function renderFeaturedProducts() {
     });
 
     listenerForAddToCart();
+    listenerForWishlist();
+    initializeWishlistState();
 }
 
 export async function renderFilteredProducts(container, products) {
@@ -125,6 +140,7 @@ export async function renderFilteredProducts(container, products) {
         productHTML += `
         <div class="js-product-card grid grid-cols-1 gap-2 relative bg-accent rounded-2xl shadow-xs p-5 justify-center items-end ease-in-out duration-200 hover:shadow-2xl" data-id="${product.id}">
             <img src="${flower}" class="blur-xs absolute h-80 -bottom-50 -right-20 pointer-events-none" alt="" />
+            ${getWishlistButtonHTML(product.id)}
             
             <!-- Image Div -->
             <a href="/product.html?id=${product.id}" class="relative flex items-center justify-center bg-center bg-no-repeat bg-contain z-[1]" style="background-image: url('${bgURL}') !important;">
@@ -218,6 +234,8 @@ export async function renderFilteredProducts(container, products) {
     });
 
     listenerForAddToCart();
+    listenerForWishlist();
+    initializeWishlistState();
 }
 
 export async function renderSingleProduct() {
@@ -268,6 +286,7 @@ export async function renderSingleProduct() {
         container.innerHTML = `        
             <div class="js-product-card grid grid-cols-1 sm:grid-cols-2 relative bg-accent rounded-2xl shadow-xs z-8 p-3 sm:py-10 max-w-[50rem] items-center" data-id="${product.id}">
                 <img src="${flower}" class="blur-xs absolute h-80 -bottom-50 -right-20" alt="" />
+                ${getWishlistButtonHTML(product.id)}
 
                 <!-- Image Div -->
                 <div class="relative flex items-center justify-center bg-center bg-no-repeat bg-contain" style="background-image: url('${bgURL}') !important">
@@ -355,6 +374,8 @@ export async function renderSingleProduct() {
 
         updateProductView(); // Ensure initial state is correct
         listenerForAddToCart();
+        listenerForWishlist();
+        initializeWishlistState();
     } catch (error) {
         console.error('Error fetching product:', error);
         container.innerHTML = `<p class="text-white text-lg">Error loading product. Please try again later.</p>`;

@@ -49,6 +49,17 @@ const userSchema = new mongoose.Schema({
       default: '1'
     }
   }],
+  wishlist: [{
+    productId: {
+      type: String,
+      required: true,
+      ref: 'Product'
+    },
+    addedAt: {
+      type: Date,
+      default: Date.now
+    }
+  }],
   isDeleted: {
     type: Boolean,
     default: false
