@@ -8,6 +8,7 @@ import { userService } from '../services/userService.js';
 import { addressService } from '../services/addressService.js';
 import { orderService } from '../services/orderService.js';
 import { renderAddresses, renderAddressForm } from '../components/addressComponents.js';
+import { productService } from '../services/productService.js';
 
 // Initialize page
 async function initPage() {
@@ -21,6 +22,9 @@ async function initPage() {
     await loadUserProfile();
     setupEventListeners();
     setupTabs();
+    await loadAddresses();
+    await loadOrders();
+    await loadWishlist();
 }
 
 // Load user profile data
@@ -366,6 +370,86 @@ async function handleDeleteAccount() {
             console.error('Account deletion error:', error);
             showToast(error.message || 'Failed to delete account', 'error');
         }
+    }
+}
+
+// Load and render wishlist
+async function loadWishlist() {
+    try {
+        const wishlist = await userService.getWishlist();
+        renderWishlist(wishlist);
+    } catch (error) {
+        console.error('Error loading wishlist:', error);
+        showToast('Failed to load wishlist', 'error');
+    }
+}
+
+// Render wishlist
+async function renderWishlist(wishlist) {
+    const wishlistGrid = document.querySelector('.js-wishlist-grid');
+    if (!wishlistGrid) return;
+
+    if (wishlist.length === 0) {
+        wishlistGrid.innerHTML = `
+        <div class="flex flex-col gap-5">
+            <div class="text-white">Your wishlist is empty</div>
+            <a href="/shop.html" class="bg-primary w-fit text-white px-6 py-2 rounded-lg hover:bg-accent transition-colors">SHOP NOW</a>
+        </div>`;
+        return;
+    }
+
+    try {
+        const products = await productService.fetchProducts();
+        const wishlistItems = wishlist.map(item => {
+            const product = products.find(p => p.id === item.productId);
+            if (!product) return null;
+
+            return `
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <div class="flex gap-4">
+                    <img src="${product.img["20kg"]}" alt="${product.title}" class="w-24 h-24 object-cover rounded-lg">
+                    <div class="flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="font-medium">${product.title}</h3>
+                            <p class="text-gray-600">${formatPriceINR(product.price["20kg"])}</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="/product.html?id=${product.id}" 
+                               class="text-primary hover:text-accent">
+                                View Details
+                            </a>
+                            <button 
+                                class="text-red-500 hover:text-red-700"
+                                onclick="removeFromWishlist('${product.id}')"
+                            >
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }).filter(Boolean).join('');
+
+        wishlistGrid.innerHTML = wishlistItems;
+
+        // Add event listeners for remove buttons
+        wishlistGrid.querySelectorAll('button[onclick^="removeFromWishlist"]').forEach(button => {
+            button.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const productId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                try {
+                    await userService.removeFromWishlist(productId);
+                    showToast('Item removed from wishlist', 'success');
+                    await loadWishlist(); // Reload wishlist after removal
+                } catch (error) {
+                    console.error('Error removing item from wishlist:', error);
+                    showToast('Failed to remove item from wishlist', 'error');
+                }
+            });
+        });
+    } catch (error) {
+        console.error('Error rendering wishlist:', error);
+        showToast('Failed to load wishlist items', 'error');
     }
 }
 
